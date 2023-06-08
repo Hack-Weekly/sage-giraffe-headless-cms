@@ -1,5 +1,5 @@
 # Imports of flask and SQLALCHEMY all done within virtualenv 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for
 from flask_sqlalchemy import SQLAlchemy
 
 #Create Flask base app object
@@ -17,11 +17,12 @@ def index():
 #Route for Login page
 @app.route('/login', methods=['GET', 'POST']) #im just adding variables here to act in place of the ones that will be in the form
 def login():
-    # im going to comment these out just because we do not have any set variables for username and password
-    # username =
-    # password = 
-    # (PSEUDOCODE) if username and password match inside DB, route to dashboard/index page
-    # if not make the user login again
+    if request.method == 'POST':
+        # im going to comment these out just because we do not have any set variables for username and password
+        username = request.form['username']
+        password = request.form['password']
+        # (PSEUDOCODE) if username and password match inside DB, route to dashboard/index page (waiting for DB set up to proceed)
+        # if not make the user login again
     return render_template('login.html')
 
 #Main function initilization
