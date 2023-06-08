@@ -14,6 +14,16 @@ db = SQLAlchemy(app)
 def index():
     return render_template('index.html')
 
+#Route for Login page
+@app.route('/login', methods=['GET', 'POST']) #im just adding variables here to act in place of the ones that will be in the form
+def login():
+    # im going to comment these out just because we do not have any set variables for username and password
+    # username =
+    # password = 
+    # (PSEUDOCODE) if username and password match inside DB, route to dashboard/index page
+    # if not make the user login again
+    return render_template('login.html')
+
 #Main function initilization
 if __name__ == "__main__":
     app.run(debug=True)
