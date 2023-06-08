@@ -41,3 +41,8 @@ def register():
             return render_template('login.html', error="Invalid username/password")
     return render_template('login.html')
 #Route for Create(?)
+
+# Create route for content page
+@api.route('/content')
+def content():
+    return render_template('content.html')
