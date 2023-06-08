@@ -11,7 +11,7 @@ def index():
     return render_template('index.html')
 
 #Route for Login page
-@api.route('/login', methods=['GET', 'POST']) #im just adding variables here to act in place of the ones that will be in the form
+@api.route('/login', methods=['GET', 'POST']) 
 def login():
     if request.method == 'POST':
         # im going to comment these out just because we do not have any set variables for username and password
@@ -24,5 +24,10 @@ def login():
         else:
             return render_template('login.html', error="Invalid username/password")
     return render_template('login.html')
+
+#Route for Registration
+@api.route('/register', methods=['GET', 'POST'])
+def register():
+    return render_template('register.html')
 
 #Route for Create(?)
