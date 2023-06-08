@@ -1,0 +1,3 @@
+{% raw %}
+Your password has been reset
+{% endraw %}

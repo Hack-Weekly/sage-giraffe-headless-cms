@@ -1,0 +1,45 @@
+{% raw %}
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="{{ url_for('public.home') }}">
+
+      <img style="object-fit: contain; margin-top: -17px;" class="img-responsive" src="{{ url_for('static', filename='img/logo.png') }}" height="53px" />
+
+    </a>
+  </div>
+  <!-- Collect the nav links, forms, and other content for toggling -->
+  <div class="collapse navbar-collapse navbar-ex1-collapse">
+    <ul class="nav navbar-nav">
+      <li><a href="{{ url_for('public.home') }}">Home</a></li>
+      <li><a href="{{ url_for('public.about') }}">About</a></li>
+    </ul>
+    {% if current_user and current_user.is_authenticated %}
+    <ul class="nav navbar-nav navbar-right">
+{% endraw %}
+        <li><a href="{{ '{{' }} url_for('{{ cookiecutter.core_table_title | lower }}.{{ cookiecutter.core_table_title | lower }}') {{ '}}' }}">{{ cookiecutter.core_table_title }}s</a></li>
+{% raw %}
+        <li>
+            <p class="navbar-text"><a class="navbar-link" href="{{ url_for('user.members') }}">Logged in as {{ current_user.email }}</a></p>
+        </li>
+        <li><a class="navbar-link" href="{{ url_for('public.logout') }}"><i class="fa fa-sign-out"></i></a></li>
+
+    </ul>
+    {% else %}
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="{{ url_for_security('login') }}">Login</a></li>
+      <li><a href="{{ url_for_security('register') }}">Create account</a></li>
+    </ul>
+    {% endif %}
+  </div><!-- /.navbar-collapse -->
+  </div><!-- /.container -->
+</nav>
+{% endraw %}
