@@ -57,3 +57,8 @@ def invalid_route(e):
     return render_template('404.html')
 
 #Route for Create(?)
+
+# Create route for content page
+@api.route('/content')
+def content():
+    return render_template('content.html')
