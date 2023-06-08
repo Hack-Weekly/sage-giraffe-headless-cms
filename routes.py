@@ -25,4 +25,19 @@ def login():
             return render_template('login.html', error="Invalid username/password")
     return render_template('login.html')
 
+# Route for Register
+@api.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        # Perform registration logic here
+
+        # (PSEUDOCODE) if username and password match inside DB, route to dashboard/index page (waiting for DB set up to proceed)
+        if username == "someName" and password == "somePassword":
+            return redirect(url_for('index'))
+        # if not make the user register again
+        else:
+            return render_template('login.html', error="Invalid username/password")
+    return render_template('login.html')
 #Route for Create(?)
