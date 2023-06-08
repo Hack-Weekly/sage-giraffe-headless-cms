@@ -22,7 +22,7 @@ class Content(db.Model):
     title = db.Column(db.String(100), nullable=False)
     body = db.Column(db.Text, nullable=False)
     createdAt = db.Column(db.DateTime, nullable=False, default=datetime.utcnow) # -5 hours for EST
-    userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     
     # Define the relationship to User model
+    userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('contents', lazy=True))
