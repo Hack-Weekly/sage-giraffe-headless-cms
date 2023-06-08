@@ -34,6 +34,7 @@ def login():
         else:
             return render_template('login.html', error="Invalid username/password")
     return render_template('login.html')
+
 # Route for Register
 @api.route('/register', methods=['GET', 'POST'])
 def register():

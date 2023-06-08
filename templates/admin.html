@@ -1,59 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="{{url_for('static', filename='css/admin-styles.css')}}"
-    />
-    <title>Admin Dashboard</title>
-  </head>
 
-  <body>
-    <div class="container">
-      <div class="title">Sage Giraffe Admin</div>
-      <div class="menu">
-        <a href="{{url_for('api.login')}}">Login</a>
-        <a href="{{url_for('api.admin')}}">Admin Dashboard</a>
-        <a href="{{url_for('api.content')}}">Content Dashboard</a>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{url_for('static', filename='css/admin-styles.css')}}" />
+  <title>Admin Dashboard</title>
+</head>
 
-      <div class="center">
-        <form action="POST">
-          <div>
-            <h3>Create new post</h3>
-          </div>
-          <div class="formEle">
-            <label for="title">Title:</label>
-            <input type="text" name="title" />
-          </div>
-          <div>
-            <label for="post">Post:</label>
-            <textarea type="text" name="post"></textarea>
-          </div>
-          <div class="formEle">
-            <button type="submit">Create New Post</button>
-          </div>
-        </form>
-      </div>
-      <div>
-        <div class="postListTitle">
-          <hr />
-          <h3>Current Posts - by date created</h3>
-          <hr />
-        </div>
-
-        <ul class="posts">
-          <li>
-            <h4>Title</h4>
-            <p>Date Created</p>
-            <p>Content</p>
-            <hr />
-          </li>
-        </ul>
-      </div>
+<body>
+  <div class="container">
+    <div class="title"><a href="{{url_for('api.index')}}">Sage Giraffe CMS</a></div>
+    <div class="menu">
+      <a href="{{url_for('api.login')}}">Login</a>
+      <a href="{{url_for('api.admin')}}">Admin Dashboard</a>
+      <a href="{{url_for('api.content')}}">Content Dashboard</a>
     </div>
-  </body>
+
+    <div class="center">
+      <form action="POST">
+        <div>
+          <h3>Create new post</h3>
+        </div>
+        <div class="formEle">
+          <label for="title">Title:</label>
+          <input type="text" name="title" />
+        </div>
+        <div>
+          <label for="post">Post:</label>
+          <textarea type="text" name="post"></textarea>
+        </div>
+        <div class="formEle">
+          <button type="submit">Create New Post</button>
+        </div>
+      </form>
+    </div>
+    <div>
+      <div class="postListTitle">
+        <hr />
+        <h3>Current Posts - by date created</h3>
+        <hr />
+      </div>
+
+      <ul class="posts">
+        <li>
+          <h4>Title</h4>
+          <p>Date Created</p>
+          <p>Content</p>
+          <hr />
+        </li>
+      </ul>
+    </div>
+  </div>
+</body>
+
 </html>
