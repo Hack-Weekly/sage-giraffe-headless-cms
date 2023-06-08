@@ -10,6 +10,16 @@ api = Blueprint('api', __name__)
 def index():
     return render_template('index.html')
 
+#Route for admin dashboard
+@api.route('/admin')
+def admin():
+    return render_template('admin.html')
+
+#Route for content dashboard
+@api.route('/content')
+def content():
+    return render_template('content.html')
+
 #Route for Login page
 @api.route('/login', methods=['GET', 'POST']) #im just adding variables here to act in place of the ones that will be in the form
 def login():
@@ -40,4 +50,10 @@ def register():
         else:
             return render_template('login.html', error="Invalid username/password")
     return render_template('login.html')
+
+#Missing Page 404 route
+@api.app_errorhandler(404)
+def invalid_route(e):
+    return render_template('404.html')
+
 #Route for Create(?)
