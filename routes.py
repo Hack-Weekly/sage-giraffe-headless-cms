@@ -1,6 +1,7 @@
 # Imports of flask and SQLALCHEMY all done within virtualenv 
 from flask import Blueprint, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
+from models import User, Content
 
 #Create Flask blueprint object
 api = Blueprint('api', __name__)
@@ -46,3 +47,48 @@ def register():
 @api.route('/content')
 def content():
     return render_template('content.html')
+
+# Create route to create content
+'''
+This route accepts the following fields from the database: title, body, and created_at and is used to create a post
+We loop where it accepts multiple users and adds it to the database
+'''
+@api.route('/add_post', methods=['POST'])
+def create_post():
+    data = request.get_json()
+    new_post = Content(id = data["id"], title = data["title"], body = data["body"], created_at = data["created_at"])
+    
+    for person in data["user"]:
+        curr_user = User.query.filter_by(name=person).first()
+
+        if(curr_user):
+            curr_user.contents.append(new_post)
+        else: #reroute to login page
+            return render_template('login.html')
+
+    db.session.add(new_post)
+    db.session.commit()
+
+    post_id = getattr(new_post, "id")
+    return jsonify({"id": post_id})
+
+# Fetch route to display posts
+@api.route('/posts',methods=["GET"])
+def get_posts():
+    posts= Content.query.all()
+    serialized_data = []
+    for post in posts:
+        serialized_data.append(post.serialize)
+
+    return jsonify({"all_posts": serialized_data})
+
+@api.route('/post/<int:id>',methods=["GET"])
+def get_single_post(id):
+    post = Content.query.filter_by(id=id).first()
+    serialized_post = post.serialize
+    serialized_post["user"] = []
+
+    for person in post.user:
+        serialized_post["user"].append(person.serialize)
+
+    return jsonify({"single_post": serialized_post})

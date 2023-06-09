@@ -25,4 +25,4 @@ class Content(db.Model):
     
     # Define the relationship to User model
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    user = db.relationship('User', backref=db.backref('contents', lazy=True))
+    user = db.relationship('User', backref=db.backref('contents', lazy="dynamic"))
