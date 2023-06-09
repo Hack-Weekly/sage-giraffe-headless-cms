@@ -1,9 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 from datetime import datetime
 
 db = SQLAlchemy()
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     # Define the table name
     __tablename__ = 'users'
     
@@ -14,8 +15,11 @@ class User(db.Model):
     role = db.Column(db.String(50), nullable=False)
     lastLogin = db.Column(db.DateTime, default=datetime.utcnow) # -5 hours for EST
 
+    def __repr__(self):
+        return '<User %r>' % self.username
 
-class Content(db.Model):
+
+class Content(db.Model, UserMixin):
     __tablename__ = 'contents'
     
     id = db.Column(db.Integer, primary_key=True)
@@ -26,3 +30,16 @@ class Content(db.Model):
     # Define the relationship to User model
     userId = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     user = db.relationship('User', backref=db.backref('contents', lazy=True))
+
+    def __repr__(self):
+        return '<Content %r>' % self.title
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'body': self.body,
+            'createdAt': self.createdAt,
+            'userId': self.userId
+        }
+    

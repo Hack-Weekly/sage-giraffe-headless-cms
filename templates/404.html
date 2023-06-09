@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/index-styles.css')}}"
+    />
+    <title>Missing Page</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="title">404 Error - Opps something went wrong...</div>
+      <div class="menu">
+        <a href="{{url_for('api.login')}}">Login </a>
+        <a href="{{url_for('api.admin')}}">Admin Dashboard </a>
+        <a href="{{url_for('api.content')}}">Content Dashboard </a>
+      </div>
+
+      <div class="center">
+        <img
+          src="{{url_for('static', filename='images/404giraffe.png')}}"
+          alt="Lost on the savannah"
+          class="giraffe"
+        />
+      </div>
+    </div>
+  </body>
+</html>
