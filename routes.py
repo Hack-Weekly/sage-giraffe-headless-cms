@@ -27,8 +27,8 @@ def login():
 
             # Query the database for the user
             user = User.query.filter_by(username=username).first()
-            # If username's password and inputted password match, route to content page
-            if user and user.password == password:
+            # If username's password and inputted password match (hashed), log user in and route to content page
+            if user and bcrypt.check_password_hash(user.password, password):
                 login_user(user)
                 return redirect(url_for('api.content'))
             # if not make the user login again
@@ -69,7 +69,7 @@ def register():
                 print(f"ID: {user.id}, Username: {user.username}, Password: {user.password}, Role: {user.role}")
 
             # Go back to home page, you can decide where you want to go next later
-            return redirect(url_for('https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley'))
+            return redirect(url_for('api.content'))
         except IntegrityError:
             # If any database integrity error occurs handle it here
             error_message = "Error in registraton, please try again."
