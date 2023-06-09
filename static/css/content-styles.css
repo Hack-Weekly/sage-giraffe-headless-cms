@@ -1,0 +1,43 @@
+.container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 3rem;
+    font-weight: bold;
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+  }
+  
+  .menu {
+    font-size: 2rem;
+    padding-bottom: 50px;
+  }
+  
+  .center {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .posts {
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+  }
+  
+  .formEle {
+    padding: 5px;
+  }
+  
+  .postListTitle {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+  }
+  
