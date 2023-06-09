@@ -26,7 +26,7 @@ def login():
     if request.method == 'POST':
         # im going to comment these out just because we do not have any set variables for username and password
         received_user = request.form['username']
-        user_final = users.query.filter_by(username=received_user).first() #broken rn
+        # user_final = users.query.filter_by(username=received_user).first() #broken rn
         password = request.form['password']
         # (PSEUDOCODE) if username and password match inside DB, route to dashboard/index page (waiting for DB set up to proceed)
         if user_final == "rob" and password == "rob":
