@@ -54,7 +54,8 @@ def register():
 @login_required
 def admin():
     if current_user.role == 'admin':
-        return render_template('admin.html')
+        contents = Content.query.order_by(Content.createdAt.desc()).all()
+        return render_template('admin.html', contents=contents)
     else:
         return render_template('login.html', error="You are not authorized to view this page")
 
