@@ -44,12 +44,15 @@
       </div>
 
       <ul class="posts">
+        <p>Posts will be listed here</p>
+        {% for content in contents %}
         <li>
-          <h4>Title</h4>
-          <p>Date Created</p>
-          <p>Content</p>
+          <h4>{{ content.title }}</h4>
+          <p>Date Created: {{ content.createdAt }}</p>
+          <p>{{ content.body }}</p>
           <hr />
         </li>
+        {% endfor %}
       </ul>
     </div>
   </div>
