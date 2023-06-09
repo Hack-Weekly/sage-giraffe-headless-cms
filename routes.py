@@ -24,14 +24,13 @@ def login():
             user = User.query.filter_by(username=username).first()
             # If username's password and inputted password match, route to content page
             if user and user.password == password:
-                print('zz')
                 login_user(user)
                 return redirect(url_for('api.content'))
             # if not make the user login again
             else:
                 return render_template('login.html', error="Invalid username/password")
-        except KeyError: # A KeyError is only thrown if the user does not exist
-            return jsonify(success=False, message='A user with that email does not exist')
+        except Exception as e:
+            return render_template('login.html', error=e)
     return render_template('login.html')
 
 # Route for Register
@@ -66,7 +65,6 @@ def content():
     if current_user.is_authenticated:
         return render_template('content.html')
     else:
-        print('hi')
         return render_template('login.html', error="You are not authorized to view this page")
 
 #Missing Page 404 route
