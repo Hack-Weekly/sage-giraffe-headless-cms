@@ -16,7 +16,7 @@
   </div>
 
   <div class="center">
-    <form action="POST">
+    <form method="post" action="{{ url_for('api.content') }}">
       <div>
         <h3>Create new post</h3>
       </div>
@@ -26,7 +26,7 @@
       </div>
       <div>
         <label for="post">Post:</label>
-        <textarea type="text" name="post"></textarea>
+        <textarea type="text" name="body"></textarea>
       </div>
       <div class="formEle">
         <button type="submit">Create New Post</button>
