@@ -25,10 +25,11 @@ def content():
 def login():
     if request.method == 'POST':
         # im going to comment these out just because we do not have any set variables for username and password
-        username = request.form['username']
+        received_user = request.form['username']
+        user_final = users.query.filter_by(username=received_user).first() #broken rn
         password = request.form['password']
         # (PSEUDOCODE) if username and password match inside DB, route to dashboard/index page (waiting for DB set up to proceed)
-        if username == "rob" and password == "rob":
+        if user_final == "rob" and password == "rob":
             return redirect(url_for('index'))
         # if not make the user login again
         else:
@@ -55,7 +56,6 @@ def register():
 @api.app_errorhandler(404)
 def invalid_route(e):
     return render_template('404.html')
-
 
 #Route for Create(?)
 
