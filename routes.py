@@ -42,6 +42,7 @@ def login():
 @api.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
+        print(request.form)
         username = request.form['username']
         password = request.form['password']
         role = request.form['role']
@@ -53,11 +54,13 @@ def register():
 
         # If user does exist then return to registration/login page with error
         if(existing_user):
-            error_message = 'Username is already taken, please choose a different one.'
-            return render_template('login.html', error_message=error_message)
+            print("User already exists")
+            error = 'Username is already taken, please choose a different one.'
+            return render_template('login.html', error=error)
         
         try:
             # Create the User and add to database
+            print("Creating new user")
             new_user = User(username=username, password=hash_password, role=role)
             db.session.add(new_user)
             db.session.commit()
@@ -72,8 +75,9 @@ def register():
             return redirect(url_for('api.content'))
         except IntegrityError:
             # If any database integrity error occurs handle it here
-            error_message = "Error in registraton, please try again."
-            return render_template('login.html', error_message=error_message)
+            print("Error in registration")
+            error = "Error in registraton, please try again."
+            return render_template('login.html', error=error)
 
         # # (PSEUDOCODE) if username and password match inside DB, route to dashboard/index page (waiting for DB set up to proceed)
         # if username == "someName" and password == "somePassword":
@@ -94,11 +98,24 @@ def admin():
         return render_template('login.html', error="You are not authorized to view this page")
 
 #Route for content dashboard
-@api.route('/content')
+@api.route('/content', methods=['GET', 'POST'])
 @login_required
 def content():
+    if request.method == 'POST':
+        print(request.form)
+        title = request.form['title']
+        body = request.form['body']
+        userId = current_user.id
+
+        new_content = Content(title=title, body=body, userId=userId)
+        db.session.add(new_content)
+        db.session.commit()
+
+        print("New content added")
+        return redirect(url_for('api.content'))
     if current_user.is_authenticated:
-        return render_template('content.html')
+        contents = Content.query.order_by(Content.createdAt.desc()).all()
+        return render_template('content.html', contents=contents)
     else:
         return render_template('login.html', error="You are not authorized to view this page")
 
