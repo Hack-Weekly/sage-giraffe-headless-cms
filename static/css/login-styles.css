@@ -43,6 +43,7 @@
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
     cursor: pointer;
+    border-radius: 8px;
 }
 
 .form button:hover,
