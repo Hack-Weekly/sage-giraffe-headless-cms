@@ -2,6 +2,8 @@ click==8.0.4
 colorama==0.4.5
 dataclasses==0.8
 Flask==2.0.3
+Flask-Bcrypt==0.7.1
+Flask-Login==0.6.2
 Flask-SQLAlchemy==2.5.1
 greenlet==2.0.2
 importlib-metadata==4.8.3
