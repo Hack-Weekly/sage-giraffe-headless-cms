@@ -16,18 +16,6 @@ def index():
 @api.route('/login', methods=['GET', 'POST']) 
 def login():
     if request.method == 'POST':
-<<<<<<< HEAD
-        # im going to comment these out just because we do not have any set variables for username and password
-        received_user = request.form['username']
-        # user_final = users.query.filter_by(username=received_user).first() #broken rn
-        password = request.form['password']
-        # (PSEUDOCODE) if username and password match inside DB, route to dashboard/index page (waiting for DB set up to proceed)
-        if user_final == "rob" and password == "rob":
-            return redirect(url_for('index'))
-        # if not make the user login again
-        else:
-            return render_template('login.html', error="Invalid username/password")
-=======
         try:
             username = request.form['username']
             password = request.form['password']
@@ -44,7 +32,6 @@ def login():
                 return render_template('login.html', error="Invalid username/password")
         except KeyError: # A KeyError is only thrown if the user does not exist
             return jsonify(success=False, message='A user with that email does not exist')
->>>>>>> 109429e5cf94b189e24332ca0d93b4438230c36f
     return render_template('login.html')
 
 # Route for Register
