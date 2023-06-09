@@ -1,9 +1,10 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import UserMixin
 from datetime import datetime
 
 db = SQLAlchemy()
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     # Define the table name
     __tablename__ = 'users'
     
@@ -15,7 +16,7 @@ class User(db.Model):
     lastLogin = db.Column(db.DateTime, default=datetime.utcnow) # -5 hours for EST
 
 
-class Content(db.Model):
+class Content(db.Model, UserMixin):
     __tablename__ = 'contents'
     
     id = db.Column(db.Integer, primary_key=True)

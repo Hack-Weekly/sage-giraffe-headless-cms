@@ -1,7 +1,7 @@
 # Imports of flask and SQLALCHEMY all done within virtualenv 
-from flask import Blueprint, render_template, request, url_for, redirect
+from flask import Blueprint, render_template, request, url_for, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import login_required, current_user
+from flask_login import login_required, current_user, login_user, logout_user
 from models import User, Content
 
 #Create Flask blueprint object
@@ -16,15 +16,22 @@ def index():
 @api.route('/login', methods=['GET', 'POST']) #im just adding variables here to act in place of the ones that will be in the form
 def login():
     if request.method == 'POST':
-        # im going to comment these out just because we do not have any set variables for username and password
-        username = request.form['username']
-        password = request.form['password']
-        # (PSEUDOCODE) if username and password match inside DB, route to dashboard/index page (waiting for DB set up to proceed)
-        if username == "rob" and password == "rob":
-            return redirect(url_for('api.index'))
-        # if not make the user login again
-        else:
-            return render_template('login.html', error="Invalid username/password")
+        try:
+            username = request.form['username']
+            password = request.form['password']
+
+            # Query the database for the user
+            user = User.query.filter_by(username=username).first()
+            # If username's password and inputted password match, route to content page
+            if user and user.password == password:
+                print('zz')
+                login_user(user)
+                return redirect(url_for('api.content'))
+            # if not make the user login again
+            else:
+                return render_template('login.html', error="Invalid username/password")
+        except KeyError: # A KeyError is only thrown if the user does not exist
+            return jsonify(success=False, message='A user with that email does not exist')
     return render_template('login.html')
 
 # Route for Register
@@ -59,6 +66,7 @@ def content():
     if current_user.is_authenticated:
         return render_template('content.html')
     else:
+        print('hi')
         return render_template('login.html', error="You are not authorized to view this page")
 
 #Missing Page 404 route
