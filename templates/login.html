@@ -14,6 +14,9 @@
         <input type="text" name="username" placeholder="Username"><br>
         <input type="password" name="password" placeholder="Password"><br>
         <input type="submit" value="Login">
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
     </form>
 </body>
 
