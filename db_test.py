@@ -6,13 +6,14 @@ try:
         users = User.query.all()
         for user in users:
             print(repr(user))
+            print(user.password)
 
         contents = Content.query.all()
         for content in contents:
             print(repr(content))
-            print(content.title)
-            print(content.createdAt)
-            print(content.body)
+            # print(content.title)
+            # print(content.createdAt)
+            # print(content.body)
         
 
 # try:
