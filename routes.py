@@ -1,6 +1,8 @@
 # Imports of flask and SQLALCHEMY all done within virtualenv 
 from flask import Blueprint, render_template, request, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import login_required, current_user
+from models import User, Content
 
 #Create Flask blueprint object
 api = Blueprint('api', __name__)
@@ -9,16 +11,6 @@ api = Blueprint('api', __name__)
 @api.route('/')
 def index():
     return render_template('index.html')
-
-#Route for admin dashboard
-@api.route('/admin')
-def admin():
-    return render_template('admin.html')
-
-#Route for content dashboard
-@api.route('/content')
-def content():
-    return render_template('content.html')
 
 #Route for Login page
 @api.route('/login', methods=['GET', 'POST']) #im just adding variables here to act in place of the ones that will be in the form
@@ -29,7 +21,7 @@ def login():
         password = request.form['password']
         # (PSEUDOCODE) if username and password match inside DB, route to dashboard/index page (waiting for DB set up to proceed)
         if username == "rob" and password == "rob":
-            return redirect(url_for('index'))
+            return redirect(url_for('api.index'))
         # if not make the user login again
         else:
             return render_template('login.html', error="Invalid username/password")
@@ -45,11 +37,29 @@ def register():
 
         # (PSEUDOCODE) if username and password match inside DB, route to dashboard/index page (waiting for DB set up to proceed)
         if username == "someName" and password == "somePassword":
-            return redirect(url_for('index'))
+            return redirect(url_for('api.index'))
         # if not make the user register again
         else:
             return render_template('login.html', error="Invalid username/password")
     return render_template('login.html')
+
+#Route for admin dashboard
+@api.route('/admin')
+@login_required
+def admin():
+    if current_user.role == 'admin':
+        return render_template('admin.html')
+    else:
+        return render_template('login.html', error="You are not authorized to view this page")
+
+#Route for content dashboard
+@api.route('/content')
+@login_required
+def content():
+    if current_user.is_authenticated:
+        return render_template('content.html')
+    else:
+        return render_template('login.html', error="You are not authorized to view this page")
 
 #Missing Page 404 route
 @api.app_errorhandler(404)
