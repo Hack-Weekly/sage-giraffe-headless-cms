@@ -2,3 +2,5 @@
 env/
 # Ignore pycache
 __pycache__/
+# Ignore adding database.db
+instance/database.db
