@@ -45,7 +45,9 @@ def register():
         print(request.form)
         username = request.form['username']
         password = request.form['password']
+        print(username, password)
         role = request.form['role']
+        print(role)
         # Perform registration logic here
 
         hash_password = bcrypt.generate_password_hash(password).decode('utf-8')
@@ -88,9 +90,10 @@ def register():
     return render_template('login.html')
 
 #Route for admin dashboard
-@api.route('/admin')
+@api.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin():
+    print(request.method)
     if current_user.role == 'admin':
         contents = Content.query.order_by(Content.createdAt.desc()).all()
         return render_template('admin.html', contents=contents)
