@@ -63,7 +63,7 @@
               <th>{{content.createdAt.strftime("%m-%d-%Y")}}</th>
               <th>
                 <div class="btn-group btn-group-sm" role="group">
-                  <button type="button" class="btn btn-warning">Update</button>
+                  <a href="{{ url_for('api.update_content', post_id=content.id) }}" class="btn btn-warning">Update</a>
                   <button type="button" class="btn btn-danger">Delete</button>
                 </div>
               </th>
