@@ -1,5 +1,8 @@
 {% extends 'base.html' %} {% block head %}
-<link rel="stylesheet" href="{{url_for('static', filename='css/admin-styles.css')}}" />
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/admin-styles.css')}}"
+/>
 <title>Admin Dashboard</title>
 {% endblock %} {% block body %}
 <div class="container">
@@ -40,17 +43,17 @@
   <div>
     <div class="postListTitle">
       <hr />
-      <h3>Current Users - by date created</h3>
+      <h3>Current Users - by last login</h3>
       <hr />
     </div>
 
     <ul class="posts">
       <p>Users will be listed here</p>
-      {% for content in contents %}
+      {% for user in users %}
       <li>
-        <h4>{{ content.title }}</h4>
-        <p>Date Created: {{ content.createdAt }}</p>
-        <p>{{ content.body }}</p>
+        <h4>Username: {{ user.username }}</h4>
+        <p>Last Login: {{ user.lastLogin }}</p>
+        <p>Role: {{ user.role }}</p>
         <hr />
       </li>
       {% endfor %}

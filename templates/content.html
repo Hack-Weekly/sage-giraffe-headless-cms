@@ -45,7 +45,7 @@
       {% for content in contents %}
       <li>
         <h4>{{ content.title }}</h4>
-        <p>Date Created: {{ content.createdAt }}</p>
+        <p>Date Created: {{ content.createdAt }} by {{ content.userId }}</p>
         <p>{{ content.body }}</p>
         <hr />
       </li>

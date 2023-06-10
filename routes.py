@@ -95,8 +95,8 @@ def register():
 def admin():
     print(request.method)
     if current_user.role == 'admin':
-        contents = Content.query.order_by(Content.createdAt.desc()).all()
-        return render_template('admin.html', contents=contents)
+        users = User.query.order_by(User.lastLogin.desc()).all()
+        return render_template('admin.html', users=users)
     else:
         return render_template('login.html', error="You are not authorized to view this page")
 
