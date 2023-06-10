@@ -1,13 +1,83 @@
 {% extends 'base.html' %} {% block head %}
+<<<<<<< HEAD
 <link rel="stylesheet" href="{{url_for('static', filename='css/admin-styles.css')}}" />
+=======
+
+>>>>>>> e59fed6e5bee03d1e917d75cf6aa235455863bca
 <title>Admin Dashboard</title>
 {% endblock %} {% block body %}
-<div class="container">
-  <div class="center">
-    <form method="post" action="{{ url_for('api.register') }}">
-      <div>
-        <h3>Create new User</h3>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card p-4">
+        <form method="post" action="{{ url_for('api.register') }}">
+          <div>
+            <h3>Create New User</h3>
+          </div>
+          <div class="row p-2">
+            <div class="col-sm-4">
+              <label for="username" class="form-label">Username:</label>
+            </div>
+            <div class="col-sm-8">
+              <input type="text" name="username" class="form-control" />
+            </div>
+          </div>
+          <div class="row p-2">
+            <div class="col-sm-4">
+              <label for="password" class="form-label">Password:</label>
+            </div>
+            <div class="col-sm-8">
+              <input type="text" name="password" class="form-control" />
+            </div>
+          </div>
+          <div class="row p-2">
+            <div class="col-sm-4">
+              <label for="role" class="form-label">Role:</label>
+            </div>
+            <div class="col-sm-8">
+              <select name="role" id="role" class="form-select">
+                <option value="writer">Writer</option>
+                <option value="admin">Admin</option>
+              </select>
+            </div>
+          </div>
+          <div class="p-4">
+            <button type="submit" class="btn btn-primary">
+              Create New User
+            </button>
+          </div>
+        </form>
       </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card p-2">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Username</th>
+              <th scope="col">Role</th>
+              <th scope="col">Last Login</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr>
+              <th>{{user.username}}</th>
+              <th>{{user.role}}</th>
+              <th>{{user.lastLogin}}</th>
+              <th>
+                <div class="btn-group btn-group-sm" role="group">
+                  <button type="button" class="btn btn-warning">Update</button>
+                  <button type="button" class="btn btn-danger">Delete</button>
+                </div>
+              </th>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+<<<<<<< HEAD
       <div class="formEle">
         <label for="username">Username:</label>
         <input type="text" name="username" />
@@ -33,19 +103,9 @@
       <hr />
       <h3>Current Users - by last login</h3>
       <hr />
+=======
+>>>>>>> e59fed6e5bee03d1e917d75cf6aa235455863bca
     </div>
-
-    <ul class="posts">
-      <p>Users will be listed here</p>
-      {% for user in users %}
-      <li>
-        <h4>Username: {{ user.username }}</h4>
-        <p>Last Login: {{ user.lastLogin }}</p>
-        <p>Role: {{ user.role }}</p>
-        <hr />
-      </li>
-      {% endfor %}
-    </ul>
   </div>
 </div>
 {% endblock %}
