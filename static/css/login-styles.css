@@ -110,7 +110,6 @@
 
 body {
     background: #16B199;
-    /* fallback for old browsers */
     background: rgb(22, 177, 153);
     background: linear-gradient(90deg, rgb(22, 177, 153) 0%, rgb(22, 177, 153) 50%);
     font-family: "Roboto", sans-serif;

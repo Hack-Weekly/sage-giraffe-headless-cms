@@ -1,8 +1,5 @@
 {% extends 'base.html' %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{{url_for('static', filename='css/admin-styles.css')}}"
-/>
+<link rel="stylesheet" href="{{url_for('static', filename='css/admin-styles.css')}}" />
 <title>Admin Dashboard</title>
 {% endblock %} {% block body %}
 <div class="container">
@@ -27,7 +24,7 @@
         </select>
       </div>
       <div class="formEle">
-        <button type="submit">Create New User</button>
+        <button class="btn btn-outline-success" type="submit">Create New User</button>
       </div>
     </form>
   </div>

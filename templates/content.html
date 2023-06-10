@@ -1,8 +1,5 @@
 {% extends 'base.html' %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{{url_for('static', filename='css/admin-styles.css')}}"
-/>
+<link rel="stylesheet" href="{{url_for('static', filename='css/admin-styles.css')}}" />
 <title>Content Dashboard</title>
 {% endblock %} {% block body %}
 <div class="container">
@@ -20,7 +17,7 @@
         <textarea type="text" name="body"></textarea>
       </div>
       <div class="formEle">
-        <button type="submit">Create New Post</button>
+        <button class="btn btn-outline-success" type="submit">Create New Post</button>
       </div>
     </form>
   </div>
