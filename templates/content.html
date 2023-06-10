@@ -7,71 +7,48 @@
 {% endblock %} {% block body %}
 <div class="container mt-4">
   <div class="row">
-    <div class="col-md-4">
-      <div class="card p-4">
-        <form method="post" action="{{ url_for('api.register') }}">
-          <div>
-            <h3>Create New Post</h3>
-          </div>
-          <div class="row p-2">
-            <div class="col-sm-4">
-              <label for="username" class="form-label">Title:</label>
-            </div>
-            <div class="col-sm-8">
-              <input type="text" name="title" class="form-control" />
-            </div>
-          </div>
-          <div class="row p-2">
-            <div class="col-sm-4">
-              <label for="post" class="form-label">Post:</label>
-            </div>
-            <div class="col-sm-8">
-              <textarea
-                type="text"
-                id="post"
-                class="form-control"
-                rows="3"
-              ></textarea>
-            </div>
-          </div>
-          <div class="p-4">
-            <button type="submit" class="btn btn-primary">
-              Create New Post
-            </button>
-          </div>
-        </form>
-      </div>
+    <div class="col-6">
+      <h2>Current Posts</h2>
     </div>
-    <div class="col-md-8">
-      <div class="card p-2">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Author</th>
-              <th scope="col">Post</th>
-              <th scope="col">Date Created</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for content in contents %}
-            <tr>
-              <th>{{content.title}}</th>
-              <th>{{content.userId}}</th>
-              <th>{{content.body}}</th>
-              <th>{{content.createdAt.strftime("%m-%d-%Y")}}</th>
-              <th>
-                <div class="btn-group btn-group-sm" role="group">
-                  <a href="{{ url_for('api.update_content', post_id=content.id) }}" class="btn btn-warning">Update</a>
-                  <button type="button" class="btn btn-danger">Delete</button>
-                </div>
-              </th>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+    <div class="col-6">
+      <a href="{{ url_for('api.add_content') }}" class="btn btn-success"
+        >Add Post</a
+      >
+    </div>
+  </div>
+  <div class="w-75 mx-auto">
+    <div class="card p-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Post</th>
+            <th scope="col">Date Created</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for content in contents %}
+          <tr>
+            <th>{{content.title}}</th>
+            <th>{{content.userId}}</th>
+            <th>{{content.body}}</th>
+            <th>{{content.createdAt.strftime("%m-%d-%Y")}}</th>
+            <th>
+              <div class="btn-group btn-group-sm" role="group">
+                <a
+                  href="{{ url_for('api.update_content', post_id=content.id) }}"
+                  class="btn btn-warning"
+                  >Edit</a
+                >
+                <button type="button" class="btn btn-danger">Delete</button>
+              </div>
+            </th>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

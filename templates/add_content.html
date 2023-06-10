@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block head %}
+<title>Edit Content</title>
+{% endblock %} {% block body %}
+<div class="container mt-4">
+  <div class="w-75 mx-auto">
+    <div class="card p-4">
+      <form method="post" action="{{ url_for('api.add_content') }}">
+        <div>
+          <h3>Create New Post</h3>
+        </div>
+        <div class="row p-2">
+          <div class="col-4 text-end">
+            <label for="username" class="form-label">
+              <strong>Title:</strong>
+            </label>
+          </div>
+          <div class="col-8">
+            <input type="text" name="title" class="form-control" />
+          </div>
+        </div>
+        <div class="row p-2">
+          <div class="col-4 text-end">
+            <label for="post" class="form-label">
+              <strong>Post:</strong>
+            </label>
+          </div>
+          <div class="col-8">
+            <textarea
+              type="text"
+              name="body"
+              class="form-control"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+        <div class="p-4">
+          <button type="submit" class="btn btn-primary">Create New Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
