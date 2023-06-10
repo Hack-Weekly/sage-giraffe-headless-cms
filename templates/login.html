@@ -1,33 +1,43 @@
-{% extends 'base.html' %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{{url_for('static', filename='css/login-styles.css')}}"
-/>
+{% extends 'base.html' %}
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/login-styles.css')}}" />
 <title>Login Page</title>
-{% endblock %} {% block body %}
+{% endblock %}
+
+{% block body %}
 <div class="login-page">
-  <div class="form">
-    <h2>Headless CMS Log-In</h2>
-    {% if error %}
-    <div class="alert alert-danger">{{ error }}</div>
-    {% endif %}
-    <form
-      class="register-form"
-      method="post"
-      action="{{ url_for('api.register') }}"
-    >
-      <input type="text" name="username" placeholder="name" />
-      <input type="password" name="password" placeholder="password" />
-      <input type="text" name="role" placeholder="role" />
-      <button type="submit">create</button>
-      <p class="message">Already registered? <a href="#">Sign In</a></p>
-    </form>
-    <form class="login-form" method="post" action="{{ url_for('api.login') }}">
-      <input type="text" name="username" placeholder="username" />
-      <input type="password" name="password" placeholder="password" />
-      <button>login</button>
-      <p class="message">Not registered? <a href="#">Create an account</a></p>
-    </form>
-  </div>
+    <div class="form">
+        <h2>Headless CMS Log-In</h2>
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+        <form class="register-form" method="post" action="{{ url_for('api.register') }}" style="display: none;">
+            <input type="text" name="username" placeholder="name" />
+            <input type="password" name="password" placeholder="password" />
+            <input type="text" name="role" placeholder="role" />
+            <button type="submit">create</button>
+            <p class="message">Already registered? <a href="#" id="login-link">Sign In</a></p>
+        </form>
+        <form class="login-form" method="post" action="{{ url_for('api.login') }}">
+            <input type="text" name="username" placeholder="username" />
+            <input type="password" name="password" placeholder="password" />
+            <button>login</button>
+            <p class="message">Not registered? <a href="#" id="register-link">Create an account</a></p>
+        </form>
+    </div>
 </div>
+
+<script>
+    document.getElementById("register-link").addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelector(".login-form").style.display = "none";
+        document.querySelector(".register-form").style.display = "block";
+    });
+
+    document.getElementById("login-link").addEventListener("click", function (e) {
+        e.preventDefault();
+        document.querySelector(".register-form").style.display = "none";
+        document.querySelector(".login-form").style.display = "block";
+    });
+</script>
 {% endblock %}
