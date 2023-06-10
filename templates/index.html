@@ -1,27 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="{{url_for('static', filename='css/index-styles.css')}}" />
-  <title>CMS Index</title>
-</head>
-
-<body>
-  <div class="container">
-    <div class="title"><a href="{{url_for('api.index')}}">Sage Giraffe CMS</a></div>
-    <div class="menu">
-      <a href="{{url_for('api.login')}}">Login</a>
-      <a href="{{url_for('api.admin')}}">Admin Dashboard</a>
-      <a href="{{url_for('api.content')}}">Content Dashboard</a>
-    </div>
-
-    <div class="center">
-      <img src="{{url_for('static', filename='images/sageGiraffeReading.png')}}" alt="A wise old giraffe reading" class="giraffe"/>
-    </div>
+{% extends 'base.html' %} {% block head %}
+<title>CMS Index</title>
+{% endblock %} {% block body %}
+<div class="container">
+  <div class="title">
+    <a href="{{url_for('api.index')}}">Sage Giraffe CMS</a>
   </div>
-</body>
+  <div class="menu">
+    <a href="{{url_for('api.login')}}">Login</a>
+    <a href="{{url_for('api.admin')}}">Admin Dashboard</a>
+    <a href="{{url_for('api.content')}}">Content Dashboard</a>
+  </div>
 
-</html>
+  <div class="center">
+    <img
+      src="{{url_for('static', filename='images/sageGiraffeReading.png')}}"
+      alt="A wise old giraffe reading"
+      class="giraffe"
+    />
+  </div>
+</div>
+{% endblock %}
