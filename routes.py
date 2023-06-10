@@ -38,6 +38,12 @@ def login():
             return render_template('login.html', error=e)
     return render_template('login.html')
 
+# Route for Logout
+@api.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('api.index'))
+
 # Route for Register
 @api.route('/register', methods=['GET', 'POST'])
 def register():

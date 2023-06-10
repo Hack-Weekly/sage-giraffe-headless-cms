@@ -6,15 +6,6 @@
 <title>Admin Dashboard</title>
 {% endblock %} {% block body %}
 <div class="container">
-  <div class="title">
-    <a href="{{url_for('api.index')}}">Sage Giraffe CMS</a>
-  </div>
-  <div class="menu">
-    <a href="{{url_for('api.login')}}">Login</a>
-    <a href="{{url_for('api.admin')}}">Admin Dashboard</a>
-    <a href="{{url_for('api.content')}}">Content Dashboard</a>
-  </div>
-
   <div class="center">
     <form method="post" action="{{ url_for('api.register') }}">
       <div>
