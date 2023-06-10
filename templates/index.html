@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block head %}
+<title>CMS Index</title>
+{% endblock %} {% block body %}
+<div class="container">
+  <div class="title">
+    <a href="{{url_for('api.index')}}">Sage Giraffe CMS</a>
+  </div>
+  <div class="menu">
+    <a href="{{url_for('api.login')}}">Login</a>
+    <a href="{{url_for('api.admin')}}">Admin Dashboard</a>
+    <a href="{{url_for('api.content')}}">Content Dashboard</a>
+  </div>
+
+  <div class="center">
+    <img
+      src="{{url_for('static', filename='images/sageGiraffeReading.png')}}"
+      alt="A wise old giraffe reading"
+      class="giraffe"
+    />
+  </div>
+</div>
+{% endblock %}

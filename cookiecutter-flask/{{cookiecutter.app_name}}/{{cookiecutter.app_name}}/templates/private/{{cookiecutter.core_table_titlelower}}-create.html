@@ -1,0 +1,52 @@
+{% raw %}
+{% extends "layout.html" %}
+{% block content %}
+<div class="container-narrow">
+{% endraw %}
+  <h1>Create a New {{cookiecutter.core_table_title}}</h1>
+    <br/>
+    <form id="{{cookiecutter.core_table_title|lower}}-create" class="form form-register" method="POST" action="" role="form">
+{% raw %}
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{form.hashtag.label}}
+                <div class='input-group'>
+                     <span class="input-group-addon">
+                        <span class="">#</span>
+                    </span>
+                    {{form.hashtag(placeholder="Hashtag", class_="form-control")}}
+                </div>
+            </div>
+            <div class="form-group">
+                {{form.start.label}}
+                <div id="starttimepicker" class='input-group date'>
+                    {{form.start(placeholder="Start Time", class_="form-control", id_="starttime")}}
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                {{form.end.label}}
+                <div id="endtimepicker" class='input-group date'>
+                    {{form.end(placeholder="End Time", class_="form-control", id_="endtime" )}}
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+             <div class="form-group">
+                {{form.body.label}}
+                <div class="">
+                    {{form.body(placeholder="", class_="form-control")}}
+                </div>
+            </div>
+
+            <p><input class="btn btn-primary btn-submit" type="submit" value="Create"></p>
+    </form>
+</div>
+{% endblock %}
+{% block js %}
+    <script type="text/javascript" src="/static/js/coretable-create.js"></script>
+{% endblock %}
+{% endraw %}

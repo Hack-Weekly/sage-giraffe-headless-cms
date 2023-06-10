@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block head %}
+<title>Missing Page</title>
+{% endblock %} {% block body %}
+<div class="container">
+  <div class="title">404 Error - Opps something went wrong...</div>
+  <div class="menu">
+    <a href="{{url_for('api.login')}}">Login </a>
+    <a href="{{url_for('api.admin')}}">Admin Dashboard </a>
+    <a href="{{url_for('api.content')}}">Content Dashboard </a>
+  </div>
+
+  <div class="center">
+    <img
+      src="{{url_for('static', filename='images/404giraffe.png')}}"
+      alt="Lost on the savannah"
+      class="giraffe"
+    />
+  </div>
+  {% endblock %}
+</div>

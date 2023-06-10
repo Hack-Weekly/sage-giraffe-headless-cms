@@ -1,0 +1,50 @@
+# Everything needed in production
+
+setuptools==20.2.2
+wheel==0.29.0
+
+# Flask
+Flask==1.0.2
+MarkupSafe==0.23
+Werkzeug==0.14.1
+Jinja2==2.10
+itsdangerous==0.24
+
+# Database
+Flask-SQLAlchemy==2.1
+mysql-python==1.2.5
+SQLAlchemy==1.0.12
+
+# Migrations
+Flask-Migrate==1.8.0
+
+# Forms
+Flask-WTF==0.14.2
+WTForms==2.1
+
+# Deployment
+gunicorn>=19.9.0
+
+# Assets
+Flask-Assets==0.11
+cssmin>=0.2.0
+jsmin>=2.2.2
+
+# Auth
+Flask-Login==0.3.2
+Flask-Bcrypt==0.7.1
+
+# Caching
+Flask-Caching>=1.6.0
+
+# Debug toolbar
+Flask-DebugToolbar==0.10.0
+
+sendgrid>=5.6.0
+python-dateutil>=2.8.0
+Marshmallow>=2.19.0
+
+Flask-Security>=3.0.0
+
+arrow>=0.13.1
+simplejson>=3.16
