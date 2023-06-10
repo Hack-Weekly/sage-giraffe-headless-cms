@@ -120,6 +120,23 @@ def content():
     else:
         return render_template('login.html', error="You are not authorized to view this page")
 
+#Route to add content
+@api.route('/content/add', methods=['GET','POST'])
+@login_required
+def add_content():
+    if request.method == 'POST':
+        title = request.form['title']
+        body = request.form['body']
+        userId = current_user.id
+
+        new_content = Content(title=title, body=body, userId=userId)
+        db.session.add(new_content)
+        db.session.commit()
+
+        return redirect(url_for('api.content'))
+    if request.method == 'GET':
+        return render_template('add_content.html')
+
 #Route to update content
 @api.route('/content/update/<int:post_id>', methods=['GET', 'POST'])
 @login_required
