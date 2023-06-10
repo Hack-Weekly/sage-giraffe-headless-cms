@@ -1,8 +1,5 @@
 {% extends 'base.html' %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{{url_for('static', filename='css/admin-styles.css')}}"
-/>
+<link rel="stylesheet" href="{{url_for('static', filename='css/admin-styles.css')}}" />
 <title>Admin Dashboard</title>
 {% endblock %} {% block body %}
 <div class="container">
@@ -48,7 +45,7 @@
     </div>
 
     <ul class="posts">
-      <p>Posts will be listed here</p>
+      <p>Users will be listed here</p>
       {% for content in contents %}
       <li>
         <h4>{{ content.title }}</h4>
