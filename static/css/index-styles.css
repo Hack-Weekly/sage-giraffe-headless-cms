@@ -59,6 +59,7 @@ a.navbar-brand:hover {
 
 body {
   background-color: #16B199 !important;
+  scroll-behavior: smooth;
 }
 
 .index-bar {
