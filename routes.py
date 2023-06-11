@@ -155,6 +155,15 @@ def update_content(post_id):
     else:
         return render_template('edit_content.html', content=content)
 
+#Route to delete content
+@api.route('/content/delete/<int:post_id>', methods=['POST'])
+@login_required
+def delete_content(post_id):
+    content = Content.query.get_or_404(post_id)
+    db.session.delete(content)
+    db.session.commit()
+    return redirect(url_for('api.content'))
+
 
 #Missing Page 404 route
 @api.app_errorhandler(404)
