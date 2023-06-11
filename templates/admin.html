@@ -1,78 +1,59 @@
 {% extends 'base.html' %} {% block head %}
-<<<<<<< HEAD
-<link rel="stylesheet" href="{{url_for('static', filename='css/admin-styles.css')}}" />
-=======
-
->>>>>>> e59fed6e5bee03d1e917d75cf6aa235455863bca
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/admin-styles.css')}}"
+/>
 <title>Admin Dashboard</title>
 {% endblock %} {% block body %}
 <div class="container mt-4">
-  <div class="row">
-    <div class="col-6">
-      <h2>Current Users</h2>
-    </div>
-    <div class="col-6">
-      <a href="{{ url_for('api.add_user') }}" class="btn btn-success"
-        >Add User</a
-      >
-    </div>
-    <div class="w-75 mx-auto">
-      <div class="card p-2">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Username</th>
-              <th scope="col">Role</th>
-              <th scope="col">Last Login</th>
-              <th scope="col">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for user in users %}
-            <tr>
-              <th>{{user.username}}</th>
-              <th>{{user.role}}</th>
-              <th>{{user.lastLogin}}</th>
-              <th>
-                <div class="btn-group btn-group-sm" role="group">
-                  <a href="#" class="btn btn-warning">Edit</a>
-                  <a href="#" class="btn btn-danger">Delete</a>
-                </div>
-              </th>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+  <div class="w-75 mx-auto">
+    <div class="card m-4 p-4">
+      <div class="row">
+        <div class="col-6">
+          <h2>Current Users</h2>
+        </div>
+        <div class="col-6">
+          <a href="{{ url_for('api.add_user') }}" class="btn btn-success"
+            >Add User</a
+          >
+        </div>
       </div>
-<<<<<<< HEAD
-      <div class="formEle">
-        <label for="username">Username:</label>
-        <input type="text" name="username" />
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="text" name="password" />
-      </div>
-      <div>
-        <label for="role">Role:</label>
-        <select name="role" id="role">
-          <option value="writer">Writer</option>
-          <option value="admin">Admin</option>
-        </select>
-      </div>
-      <div class="formEle">
-        <button class="btn btn-outline-success" type="submit">Create New User</button>
-      </div>
-    </form>
-  </div>
-  <div>
-    <div class="postListTitle">
-      <hr />
-      <h3>Current Users - by last login</h3>
-      <hr />
-=======
->>>>>>> e59fed6e5bee03d1e917d75cf6aa235455863bca
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Role</th>
+            <th scope="col">Last Login</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr>
+            <th>{{user.username}}</th>
+            <th>{{user.role}}</th>
+            <th>{{user.lastLogin}}</th>
+            <th>
+              <div class="btn-group btn-group-sm" role="group">
+                <a
+                  href="{{ url_for('api.update_user', user_id=user.id) }}"
+                  method="get"
+                  class="btn btn-warning"
+                  >Edit</a
+                >
+                <a
+                  href="{{ url_for('api.delete_user', user_id=user.id) }}"
+                  method="POST"
+                  class="btn btn-danger"
+                  >Delete</a
+                >
+              </div>
+            </th>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
   </div>
-  {% endblock %}
 </div>
+{% endblock %}

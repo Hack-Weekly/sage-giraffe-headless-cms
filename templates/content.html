@@ -1,46 +1,21 @@
 {% extends 'base.html' %} {% block head %}
-<link rel="stylesheet" href="{{url_for('static', filename='css/admin-styles.css')}}" />
+
 <title>Content Dashboard</title>
 {% endblock %} {% block body %}
-<<<<<<< HEAD
-<div class="container">
-  <div class="center">
-    <form method="post" action="{{ url_for('api.content') }}">
-      <div>
-        <h3>Create new post</h3>
-      </div>
-      <div class="formEle">
-        <label for="title">Title:</label>
-        <input type="text" name="title" />
-      </div>
-      <div>
-        <label for="post">Post:</label>
-        <textarea type="text" name="body"></textarea>
-      </div>
-      <div class="formEle">
-        <button class="btn btn-outline-success" type="submit">Create New Post</button>
-      </div>
-    </form>
-  </div>
-  <div>
-    <div class="postListTitle">
-      <hr />
-      <h3>Current Posts - by date created</h3>
-      <hr />
-=======
 <div class="container mt-4">
-  <div class="row">
-    <div class="col-6">
-      <h2>Current Posts</h2>
-    </div>
-    <div class="col-6">
-      <a href="{{ url_for('api.add_content') }}" class="btn btn-success"
-        >Add Post</a
-      >
-    </div>
-  </div>
   <div class="w-75 mx-auto">
-    <div class="card p-2">
+    <div class="card m-4 p-4">
+      <div class="row">
+        <div class="col-6">
+          <h2>Current Posts</h2>
+        </div>
+        <div class="col-6">
+          <a href="{{ url_for('api.add_content') }}" class="btn btn-success"
+            >New Post</a
+          >
+        </div>
+      </div>
+
       <table class="table">
         <thead>
           <tr>
@@ -61,18 +36,25 @@
             <th>
               <div class="btn-group btn-group-sm" role="group">
                 <a
+                  method="get"
                   href="{{ url_for('api.update_content', post_id=content.id) }}"
                   class="btn btn-warning"
-                  >Edit</a
                 >
-                <button type="button" class="btn btn-danger">Delete</button>
+                  Update
+                </a>
+                <a
+                  method="post"
+                  href="{{ url_for('api.delete_content', post_id=content.id) }}"
+                  class="btn btn-danger"
+                >
+                  Delete
+                </a>
               </div>
             </th>
           </tr>
           {% endfor %}
         </tbody>
       </table>
->>>>>>> e59fed6e5bee03d1e917d75cf6aa235455863bca
     </div>
   </div>
 </div>

@@ -88,18 +88,11 @@ def register():
 @api.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin():
-    print(request.method)
     if current_user.role == 'admin':
         users = User.query.order_by(User.lastLogin.desc()).all()
         return render_template('admin.html', users=users)
     else:
         return render_template('login.html', error="You are not authorized to view this page")
-
-#Route for add user from admin dashboard
-@api.route('/admin/add_user', methods=['GET'])
-@login_required
-def add_user():
-    return render_template('add_user.html')
 
 #Route for content dashboard
 @api.route('/content', methods=['GET', 'POST'])
@@ -141,7 +134,7 @@ def add_content():
         return render_template('add_content.html')
 
 #Route to update content
-@api.route('/content/update/<int:post_id>', methods=['GET', 'POST'])
+@api.route('/content/update/<int:post_id>', methods=['GET','POST'])
 @login_required
 def update_content(post_id):
     content = Content.query.get_or_404(post_id)
@@ -155,6 +148,47 @@ def update_content(post_id):
             return "There was an error updating your content"
     else:
         return render_template('edit_content.html', content=content)
+
+#Route to delete content
+@api.route('/content/delete/<int:post_id>', methods=['POST'])
+@login_required
+def delete_content(post_id):
+    content = Content.query.get_or_404(post_id)
+    db.session.delete(content)
+    db.session.commit()
+    return redirect(url_for('api.content'))
+
+#Route for add user from admin dashboard
+@api.route('/admin/add_user', methods=['GET'])
+@login_required
+def add_user():
+    return render_template('add_user.html')
+
+#Route to update user
+@api.route('/admin/update/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def update_user(user_id):
+    user = User.query.get_or_404(user_id)
+    if request.method == 'POST':
+        user.username = request.form['username']
+        user.password = bcrypt.generate_password_hash(request.form['password']).decode('utf-8')
+        user.role = request.form['role']
+        try:
+            db.session.commit()
+            return redirect(url_for('api.admin'))
+        except:
+            return "There was an error updating your content"
+    else:
+        return render_template('edit_user.html', user=user)
+
+#Route to delete user
+@api.route('/admin/delete/<int:user_id>', methods=['POST'])
+@login_required
+def delete_user(user_id):
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    return redirect(url_for('api.admin'))
 
 
 #Missing Page 404 route
