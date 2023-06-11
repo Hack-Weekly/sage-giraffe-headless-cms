@@ -3,6 +3,10 @@
   margin: 0;
   padding: 0;
   text-align: center;
+  background-color: white;
+  margin-top: 2rem;
+  border-radius: 8px;
+  display: flex;
 }
 
 .title {
@@ -15,6 +19,8 @@
 .menu {
   font-size: 2rem;
   padding-bottom: 50px;
+  background-color: #16B199;
+  background: #16B199;
 }
 
 .center {
@@ -26,4 +32,67 @@
 .giraffe {
   width: 35%;
   height: auto;
+}
+
+a.navbar-brand:hover {
+  background-color: #16B199;
+  padding: 5px;
+  border-radius: 8px;
+  color: white;
+  transition: 0.2s;
+}
+
+.nav-link:hover {
+  background-color: #16B199;
+  padding: 5px;
+  border-radius: 8px;
+  transition: 0.2s;
+  color: white !important;
+  padding: 5px;
+  transform: scale(1.05);
+}
+
+.nav-link {
+  border-radius: 8px;
+  color: black;
+}
+
+body {
+  background-color: #16B199 !important;
+}
+
+.index-bar {
+  width: 30%;
+  height: 100%;
+}
+
+.documentation-section {
+  width: 70%;
+  height: 100%;
+  border-left: 2px solid black;
+}
+
+.index-bar {
+  padding: 10px;
+}
+
+.index-bar h2 {
+  margin-top: 0;
+}
+
+.index-bar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.index-bar a {
+  display: block;
+  margin-bottom: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.index-bar a:hover {
+  color: #16B199;
 }
