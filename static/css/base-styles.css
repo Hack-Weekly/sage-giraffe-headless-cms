@@ -1,0 +1,27 @@
+a.navbar-brand:hover {
+  background-color: #16b199;
+  padding: 5px;
+  border-radius: 8px;
+  color: white;
+  transition: 0.2s;
+}
+
+.nav-link:hover {
+  background-color: #16b199;
+  padding: 5px;
+  border-radius: 8px;
+  transition: 0.2s;
+  color: white !important;
+  padding: 5px;
+  transform: scale(1.05);
+}
+
+.nav-link {
+  border-radius: 8px;
+  color: black;
+}
+
+body {
+  background-color: #16b199 !important;
+  scroll-behavior: smooth;
+}

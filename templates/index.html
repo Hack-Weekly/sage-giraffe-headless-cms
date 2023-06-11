@@ -1,10 +1,17 @@
 {% extends 'base.html' %} {% block head %}
 <title>CMS Index</title>
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/index-styles.css')}}"
+/>
 {% endblock %} {% block body %}
 <div class="container index">
   <div class="center">
-    <img src="{{url_for('static', filename='images/sageGiraffeReading.png')}}" alt="A wise old giraffe reading"
-      class="giraffe" />
+    <img
+      src="{{url_for('static', filename='images/sageGiraffeReading.png')}}"
+      alt="A wise old giraffe reading"
+      class="giraffe"
+    />
   </div>
 </div>
 <div class="container index">
@@ -20,19 +27,28 @@
   <div class="documentation-section">
     <h1>Documentation Section</h1>
     <h2 id="section1">How To Use It</h2>
-    <p>Our Headless CMS was structured to be used by any costumer in any type of product. Through our thoughfully
-      engineered architecture,
-      we provide a platform for all your needs.
+    <p>
+      Our Headless CMS was structured to be used by any costumer in any type of
+      product. Through our thoughfully engineered architecture, we provide a
+      platform for all your needs.
     </p>
 
     <h2 id="section2">Admin Page</h2>
-    <p>Etiam consequat tellus tellus, id bibendum justo eleifend sed. Fusce fermentum libero a fringilla dapibus.</p>
+    <p>
+      Etiam consequat tellus tellus, id bibendum justo eleifend sed. Fusce
+      fermentum libero a fringilla dapibus.
+    </p>
 
     <h2 id="section3">Content Page</h2>
-    <p>Nunc eu tincidunt tellus, ut scelerisque lorem. Sed tincidunt turpis id risus tincidunt feugiat.</p>
+    <p>
+      Nunc eu tincidunt tellus, ut scelerisque lorem. Sed tincidunt turpis id
+      risus tincidunt feugiat.
+    </p>
 
     <h2 id="section4">LogIn/Registration</h2>
-    <p>Phasellus ac tristique enim, et ultrices enim. In dapibus nulla id urna malesuada, id interdum elit vestibulum.
+    <p>
+      Phasellus ac tristique enim, et ultrices enim. In dapibus nulla id urna
+      malesuada, id interdum elit vestibulum.
     </p>
   </div>
 </div>

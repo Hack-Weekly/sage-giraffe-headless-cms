@@ -134,7 +134,7 @@ def add_content():
         return render_template('add_content.html')
 
 #Route to update content
-@api.route('/content/update/<int:post_id>', methods=['GET', 'POST'])
+@api.route('/content/update/<int:post_id>', methods=['GET','POST'])
 @login_required
 def update_content(post_id):
     content = Content.query.get_or_404(post_id)

@@ -1,50 +1,67 @@
-{% extends 'base.html' %}
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/admin-styles.css') }}">
-<title>Edit User</title>
-{% endblock %}
-
-{% block body %}
+{% extends 'base.html' %} {% block head %}
+<title>New User</title>
+{% endblock %} {% block body %}
 <div class="container mt-4">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <div class="card p-4">
-        <form method="post" action="{{ url_for('api.update_user', user_id=user.id) }}">
-          <div>
-            <h3>Edit User</h3>
+  <div class="w-75 mx-auto">
+    <div class="card p-4">
+      <form
+        method="post"
+        action="{{ url_for('api.update_user', user_id=user.id) }}"
+      >
+        <div>
+          <h3>Update User</h3>
+        </div>
+        <div class="row p-2">
+          <div class="col-4 text-end">
+            <label for="username" class="form-label">
+              <strong>Username:</strong>
+            </label>
           </div>
-          <div class="row p-2">
-            <div class="col-sm-4">
-              <label for="username" class="form-label">Username:</label>
-            </div>
-            <div class="col-sm-8">
-              <input type="text" name="username" class="form-control" value="{{ user.username }}">
-            </div>
+          <div class="col-8">
+            <input
+              type="text"
+              name="username"
+              class="form-control"
+              value="{{user.username}}"
+            />
           </div>
-          <div class="row p-2">
-            <div class="col-sm-4">
-              <label for="password" class="form-label">Password:</label>
-            </div>
-            <div class="col-sm-8">
-              <input type="password" name="password" class="form-control">
-            </div>
+        </div>
+        <div class="row p-2">
+          <div class="col-4 text-end">
+            <label for="password" class="form-label">
+              <strong>Password:</strong>
+            </label>
           </div>
-          <div class="row p-2">
-            <div class="col-sm-4">
-              <label for="role" class="form-label">Role:</label>
-            </div>
-            <div class="col-sm-8">
-              <select name="role" class="form-select">
-                <option value="admin" {% if user.role == 'admin' %}selected{% endif %}>Admin</option>
-                <option value="user" {% if user.role == 'user' %}selected{% endif %}>User</option>
-              </select>
-            </div>
+          <div class="col-8">
+            <input type="text" name="password" class="form-control" />
           </div>
-          <div class="p-4">
-            <button type="submit" class="btn btn-primary">Update User</button>
+        </div>
+        <div class="row p-2">
+          <div class="col-4 text-end">
+            <label for="role" class="form-label">
+              <strong>Role:</strong>
+            </label>
           </div>
-        </form>
-      </div>
+          <div class="col-8">
+            <select
+              name="role"
+              id="role"
+              class="form-select"
+              value="{{user.role}}"
+            >
+              <option value="writer"
+              {% if user.role == 'writer' %}selected{% endif %}
+              >Writer</option>
+              <option value="admin"
+              {% if user.role == 'admin' %}selected{% endif %}
+              >Admin</option>
+            </select>
+          </div>
+        </div>
+        <div class="p-4">
+          <button type="submit" class="btn btn-primary">Update User</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

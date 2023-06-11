@@ -1,24 +1,45 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Edit Content</title>
+<title>Update Post</title>
 {% endblock %}
 
 {% block body %}
 <div class="container mt-4">
-  <div class="row">
-    <div class="col-md-6 offset-md-3">
-      <div class="card p-4">
-        <h3>Edit Content</h3>
+  <div class="w-75 mx-auto">
+    <div class="card p-4">
         <form method="post" action="{{ url_for('api.update_content', post_id=content.id) }}">
-          <div class="mb-3">
-            <label for="title" class="form-label">Title:</label>
-            <input type="text" name="title" class="form-control" value="{{ content.title }}" required>
+          <div>
+            <h3>Update Post</h3>
           </div>
-          <div class="mb-3">
-            <label for="body" class="form-label">Body:</label>
-            <textarea name="body" class="form-control" rows="5" required>{{ content.body }}</textarea>
+          <div class="row p-2">
+            <div class="col-4 text-end">
+              <label for="title" class="form-label">
+                <strong>Title:</strong>
+              </label>
+            </div>
+            <div class="col-8">
+              <input
+                type="text"
+                name="title"
+                class="form-control"
+                value="{{content.title}}"
+              />
+            </div>
           </div>
+          
+          <div class="row p-2">
+            <div class="col-4 text-end">
+              <label for="body" class="form-label">
+                <strong>Body:</strong>
+              </label>
+            </div>
+            <div class="col-8">
+              <textarea name="body" class="form-control" rows="5" required>{{ content.body }}</textarea>
+          
+            </div>
+          </div>
+
           <div class="text-center">
             <button type="submit" class="btn btn-primary">Update</button>
           </div>
