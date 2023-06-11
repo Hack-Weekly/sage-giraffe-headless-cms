@@ -48,12 +48,9 @@ def logout():
 @api.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        print(request.form)
         username = request.form['username']
         password = request.form['password']
-        print(username, password)
         role = request.form['role']
-        print(role)
         # Perform registration logic here
 
         hash_password = bcrypt.generate_password_hash(password).decode('utf-8')
@@ -97,6 +94,12 @@ def admin():
         return render_template('admin.html', users=users)
     else:
         return render_template('login.html', error="You are not authorized to view this page")
+
+#Route for add user from admin dashboard
+@api.route('/admin/add_user', methods=['GET'])
+@login_required
+def add_user():
+    return render_template('add_user.html')
 
 #Route for content dashboard
 @api.route('/content', methods=['GET', 'POST'])
