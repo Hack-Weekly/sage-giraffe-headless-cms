@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-md-4">
       <div class="card p-4">
-        <form method="post" action="{{ url_for('api.register') }}">
+        <form method="post" action="{{ url_for('api.add_content') }}">
           <div>
             <h3>Create New Post</h3>
           </div>
@@ -28,6 +28,7 @@
             <div class="col-sm-8">
               <textarea
                 type="text"
+                name="body"
                 id="post"
                 class="form-control"
                 rows="3"
@@ -64,7 +65,9 @@
               <th>
                 <div class="btn-group btn-group-sm" role="group">
                   <a href="{{ url_for('api.update_content', post_id=content.id) }}" class="btn btn-warning">Update</a>
-                  <button type="button" class="btn btn-danger">Delete</button>
+                  <form method="post" action="{{ url_for('api.delete_content', post_id=content.id) }}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                  </form>
                 </div>
               </th>
             </tr>
