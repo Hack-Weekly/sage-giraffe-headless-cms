@@ -3,6 +3,9 @@
   margin: 0;
   padding: 0;
   text-align: center;
+  background-color: white;
+  margin-top: 2rem;
+  border-radius: 8px;
 }
 
 .title {
@@ -51,4 +54,8 @@ a.navbar-brand:hover {
 .nav-link {
   border-radius: 8px;
   color: black;
+}
+
+body {
+  background-color: #16B199 !important;
 }
