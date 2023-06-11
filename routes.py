@@ -91,7 +91,6 @@ def register():
 @api.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin():
-    print(request.method)
     if current_user.role == 'admin':
         users = User.query.order_by(User.lastLogin.desc()).all()
         return render_template('admin.html', users=users)
