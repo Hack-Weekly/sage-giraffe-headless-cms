@@ -38,16 +38,19 @@ def login():
             return render_template('login.html', error=e)
     return render_template('login.html')
 
+# Route for Logout
+@api.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('api.index'))
+
 # Route for Register
 @api.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        print(request.form)
         username = request.form['username']
         password = request.form['password']
-        print(username, password)
         role = request.form['role']
-        print(role)
         # Perform registration logic here
 
         hash_password = bcrypt.generate_password_hash(password).decode('utf-8')
@@ -73,20 +76,12 @@ def register():
             for user in all_users:
                 print(f"ID: {user.id}, Username: {user.username}, Password: {user.password}, Role: {user.role}")
 
-            # Go back to home page, you can decide where you want to go next later
-            return redirect(url_for('api.content'))
+            return redirect(url_for('api.admin'))
         except IntegrityError:
             # If any database integrity error occurs handle it here
             print("Error in registration")
             error = "Error in registraton, please try again."
             return render_template('login.html', error=error)
-
-        # # (PSEUDOCODE) if username and password match inside DB, route to dashboard/index page (waiting for DB set up to proceed)
-        # if username == "someName" and password == "somePassword":
-        #     return redirect(url_for('index'))
-        # # if not make the user register again
-        # else:
-        #     return render_template('login.html', error="Invalid username/password")
     return render_template('login.html')
 
 #Route for admin dashboard
@@ -95,10 +90,16 @@ def register():
 def admin():
     print(request.method)
     if current_user.role == 'admin':
-        contents = Content.query.order_by(Content.createdAt.desc()).all()
-        return render_template('admin.html', contents=contents)
+        users = User.query.order_by(User.lastLogin.desc()).all()
+        return render_template('admin.html', users=users)
     else:
         return render_template('login.html', error="You are not authorized to view this page")
+
+#Route for add user from admin dashboard
+@api.route('/admin/add_user', methods=['GET'])
+@login_required
+def add_user():
+    return render_template('add_user.html')
 
 #Route for content dashboard
 @api.route('/content', methods=['GET', 'POST'])
@@ -121,6 +122,40 @@ def content():
         return render_template('content.html', contents=contents)
     else:
         return render_template('login.html', error="You are not authorized to view this page")
+
+#Route to add content
+@api.route('/content/add', methods=['GET','POST'])
+@login_required
+def add_content():
+    if request.method == 'POST':
+        title = request.form['title']
+        body = request.form['body']
+        userId = current_user.id
+
+        new_content = Content(title=title, body=body, userId=userId)
+        db.session.add(new_content)
+        db.session.commit()
+
+        return redirect(url_for('api.content'))
+    if request.method == 'GET':
+        return render_template('add_content.html')
+
+#Route to update content
+@api.route('/content/update/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def update_content(post_id):
+    content = Content.query.get_or_404(post_id)
+    if request.method == 'POST':
+        content.title = request.form['title']
+        content.body = request.form['body']
+        try:
+            db.session.commit()
+            return redirect(url_for('api.content'))
+        except:
+            return "There was an error updating your content"
+    else:
+        return render_template('edit_content.html', content=content)
+
 
 #Missing Page 404 route
 @api.app_errorhandler(404)

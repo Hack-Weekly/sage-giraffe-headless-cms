@@ -1,20 +1,9 @@
 {% extends 'base.html' %} {% block head %}
-<link
-  rel="stylesheet"
-  href="{{url_for('static', filename='css/admin-styles.css')}}"
-/>
+<link rel="stylesheet" href="{{url_for('static', filename='css/admin-styles.css')}}" />
 <title>Content Dashboard</title>
 {% endblock %} {% block body %}
+<<<<<<< HEAD
 <div class="container">
-  <div class="title">
-    <a href="{{url_for('api.index')}}">Sage Giraffe CMS</a>
-  </div>
-  <div class="menu">
-    <a href="{{url_for('api.login')}}">Login</a>
-    <a href="{{url_for('api.admin')}}">Admin Dashboard</a>
-    <a href="{{url_for('api.content')}}">Content Dashboard</a>
-  </div>
-
   <div class="center">
     <form method="post" action="{{ url_for('api.content') }}">
       <div>
@@ -29,7 +18,7 @@
         <textarea type="text" name="body"></textarea>
       </div>
       <div class="formEle">
-        <button type="submit">Create New Post</button>
+        <button class="btn btn-outline-success" type="submit">Create New Post</button>
       </div>
     </form>
   </div>
@@ -38,19 +27,53 @@
       <hr />
       <h3>Current Posts - by date created</h3>
       <hr />
+=======
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-6">
+      <h2>Current Posts</h2>
     </div>
-
-    <ul class="posts">
-      <p>Posts will be listed here</p>
-      {% for content in contents %}
-      <li>
-        <h4>{{ content.title }}</h4>
-        <p>Date Created: {{ content.createdAt }}</p>
-        <p>{{ content.body }}</p>
-        <hr />
-      </li>
-      {% endfor %}
-    </ul>
+    <div class="col-6">
+      <a href="{{ url_for('api.add_content') }}" class="btn btn-success"
+        >Add Post</a
+      >
+    </div>
+  </div>
+  <div class="w-75 mx-auto">
+    <div class="card p-2">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Post</th>
+            <th scope="col">Date Created</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for content in contents %}
+          <tr>
+            <th>{{content.title}}</th>
+            <th>{{content.userId}}</th>
+            <th>{{content.body}}</th>
+            <th>{{content.createdAt.strftime("%m-%d-%Y")}}</th>
+            <th>
+              <div class="btn-group btn-group-sm" role="group">
+                <a
+                  href="{{ url_for('api.update_content', post_id=content.id) }}"
+                  class="btn btn-warning"
+                  >Edit</a
+                >
+                <button type="button" class="btn btn-danger">Delete</button>
+              </div>
+            </th>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+>>>>>>> e59fed6e5bee03d1e917d75cf6aa235455863bca
+    </div>
   </div>
 </div>
 {% endblock %}
