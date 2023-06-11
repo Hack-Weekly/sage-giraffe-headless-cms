@@ -6,6 +6,7 @@
   background-color: white;
   margin-top: 2rem;
   border-radius: 8px;
+  display: flex;
 }
 
 .title {
@@ -58,4 +59,40 @@ a.navbar-brand:hover {
 
 body {
   background-color: #16B199 !important;
+}
+
+.index-bar {
+  width: 30%;
+  height: 100%;
+}
+
+.documentation-section {
+  width: 70%;
+  height: 100%;
+  border-left: 2px solid black;
+}
+
+.index-bar {
+  padding: 10px;
+}
+
+.index-bar h2 {
+  margin-top: 0;
+}
+
+.index-bar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.index-bar a {
+  display: block;
+  margin-bottom: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.index-bar a:hover {
+  color: #16B199;
 }
