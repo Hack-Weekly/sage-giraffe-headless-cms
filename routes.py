@@ -1,7 +1,7 @@
 # Imports of flask and SQLALCHEMY all done within virtualenv 
 from flask import Blueprint, render_template, request, url_for, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from models import User, Content, Log, db
+from models import User, Content, db
 from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError
 
@@ -65,23 +65,18 @@ def register():
         
         try:
             # Create the User and add to database
+            print("Creating new user")
             new_user = User(username=username, password=hash_password, role=role)
             db.session.add(new_user)
+            db.session.commit()
 
-            try:
-                db.session.commit()
+            # This is some code to see if user is making it into db :)
+            all_users = db.session.query(User).all()
 
-                log_entry = Log(user_id=new_user.id, action=f'Registered new user: {username}')
-                db.session.add(log_entry)
-                db.session.commit()
+            for user in all_users:
+                print(f"ID: {user.id}, Username: {user.username}, Password: {user.password}, Role: {user.role}")
 
-                if current_user.role == 'admin' or (not current_user and role == 'admin'):
-                    return redirect(url_for('api.admin'))
-                else:
-                    return redirect(url_for('api.index'))
-            except:
-                return "There was an error adding your user"
-
+            return redirect(url_for('api.admin'))
         except IntegrityError:
             # If any database integrity error occurs handle it here
             print("Error in registration")
@@ -97,7 +92,7 @@ def admin():
         users = User.query.order_by(User.lastLogin.desc()).all()
         return render_template('admin.html', users=users)
     else:
-        return render_template('index.html', error="You are not authorized to view this page")
+        return render_template('login.html', error="You are not authorized to view this page")
 
 #Route for content dashboard
 @api.route('/content', methods=['GET', 'POST'])
@@ -132,16 +127,9 @@ def add_content():
 
         new_content = Content(title=title, body=body, userId=userId)
         db.session.add(new_content)
-        try:
-            db.session.commit()
+        db.session.commit()
 
-            log_entry = Log(user_id=current_user.id, action=f'Added content: {title}')
-            db.session.add(log_entry)
-            db.session.commit()
-            return redirect(url_for('api.content'))
-        except:
-            return "There was an error adding your content"
-
+        return redirect(url_for('api.content'))
     if request.method == 'GET':
         return render_template('add_content.html')
 
@@ -155,10 +143,6 @@ def update_content(post_id):
         content.body = request.form['body']
         try:
             db.session.commit()
-
-            log_entry = Log(user_id=current_user.id, action=f'Updated content: {content.title}')
-            db.session.add(log_entry)
-            db.session.commit()
             return redirect(url_for('api.content'))
         except:
             return "There was an error updating your content"
@@ -171,15 +155,8 @@ def update_content(post_id):
 def delete_content(post_id):
     content = Content.query.get_or_404(post_id)
     db.session.delete(content)
-    try:
-        db.session.commit()
-
-        log_entry = Log(user_id=current_user.id, action=f'Deleted content: {content.title}')
-        db.session.add(log_entry)
-        db.session.commit()
-        return redirect(url_for('api.content'))
-    except:
-        return "There was an error deleting your content"
+    db.session.commit()
+    return redirect(url_for('api.content'))
 
 #Route to confirm delete content
 @api.route('/content/confirm_delete/<int:post_id>', methods=['GET'])
@@ -205,10 +182,6 @@ def update_user(user_id):
         user.role = request.form['role']
         try:
             db.session.commit()
-
-            log_entry = Log(user_id=current_user.id, action=f'Updated user: {user.username}')
-            db.session.add(log_entry)
-            db.session.commit()
             return redirect(url_for('api.admin'))
         except:
             return "There was an error updating your content"
@@ -220,27 +193,9 @@ def update_user(user_id):
 @login_required
 def delete_user(user_id):
     user = User.query.get_or_404(user_id)
-    # Delete all content associated with user
-    if user.contents:
-        for content in user.contents:
-            db.session.delete(content)
-
-    # Delete all activity logs associated with the user
-    if user.user_logs:
-        for log in user.user_logs:
-            db.session.delete(log)
-
     db.session.delete(user)
-
-    try:
-        db.session.commit()
-
-        log_entry = Log(user_id=current_user.id, action=f'Deleted user: {user.username}')
-        db.session.add(log_entry)
-        db.session.commit()
-        return redirect(url_for('api.admin'))
-    except Exception as e:
-        return "There was an error deleting the user: " + str(e)
+    db.session.commit()
+    return redirect(url_for('api.admin'))
 
 #Route to confirm delete user
 @api.route('/admin/confirm_delete/<int:user_id>', methods=['GET'])
