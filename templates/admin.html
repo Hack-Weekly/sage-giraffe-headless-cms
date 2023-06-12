@@ -50,6 +50,16 @@
               </div>
             </th>
           </tr>
+          <tr>
+            <td colspan="4">
+              <strong>Activity Log:</strong>
+              <ul>
+                {% for log in user.logs %}
+                <li>{{ log.timestamp }} - {{ log.action }}</li>
+                {% endfor %}
+              </ul>
+            </td>
+          </tr>
           {% endfor %}
         </tbody>
       </table>
