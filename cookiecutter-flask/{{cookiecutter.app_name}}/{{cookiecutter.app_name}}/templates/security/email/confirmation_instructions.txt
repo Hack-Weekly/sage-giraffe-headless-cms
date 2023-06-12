@@ -1,5 +1,0 @@
-{% raw %}
-Please confirm your email through the link below:
-
-{{ confirmation_link }}
-{% endraw %}
