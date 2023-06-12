@@ -12,9 +12,9 @@
   <div class="index-bar">
     <h1>Table of Contents</h1>
     <ul>
-      <li><a href="#section1">How To Use It</a></li>
+      <li id="main"><a href="#section1">How To Use It</a></li>
       <li>
-        <a href="#section5">Features</a>
+        <a id="main" href="#section5">Features</a>
         <ul>
           <a href="#sub-section1">
             <li class="sub-index">I. User Authentication</li>
@@ -23,13 +23,16 @@
             <li class="sub-index">II. User Management</li>
           </a>
           <a href="#sub-section3">
-            <li class="sub-index">I. Content Management</li>
+            <li class="sub-index">III. Content Management</li>
+          </a>
+          <a href="#sub-section4">
+            <li class="sub-index">IV. Routing and Page Rendering</li>
           </a>
         </ul>
       </li>
-      <li><a href="#section2">Admin Page</a></li>
-      <li><a href="#section3">Content Page</a></li>
-      <li><a href="#section4">LogIn/Registration</a></li>
+      <li id="main"><a href="#section2">Admin Page</a></li>
+      <li id="main"><a href="#section3">Content Page</a></li>
+      <li id="main"><a href="#section4">LogIn/Registration</a></li>
     </ul>
   </div>
   <div class="documentation-section">
@@ -67,6 +70,23 @@
       <li>Add Content: Authenticated users can create new content by providing a title and body.</li>
       <li>Update Content: Authenticated users can edit the title and body of their existing content.</li>
       <li>Delete Content: Authenticated users can delete their own content.</li>
+    </ul>
+    <h3 id="sub-section4">IV. Routing and Page Rendering:</h3>
+    <ul>
+      <li>Index Route: Renders the default index.html template.</li>
+      <li>Login Route: Renders the login page template and handles user authentication.</li>
+      <li>Logout Route: Logs out the user and redirects to the index route.</li>
+      <li>Register Route: Handles user registration and redirects to the admin dashboard upon successful registration.
+      </li>
+      <li>Admin Dashboard Route: Renders the admin dashboard template and displays the list of registered users.</li>
+      <li>Content Dashboard Route: Renders the content dashboard template and displays the list of contents.</li>
+      <li>Add Content Route: Renders the add content template and handles the creation of new content.</li>
+      <li>Update Content Route: Renders the edit content template and handles the updating of existing content.</li>
+      <li>Delete Content Route: Handles the deletion of content.</li>
+      <li>Add User Route: Renders the add user template for admin users to add new users.</li>
+      <li>Update User Route: Renders the edit user template and handles the updating of user details.</li>
+      <li>Delete User Route: Handles the deletion of a user.</li>
+      <li>404 Route: Renders a custom 404.html template for invalid routes.</li>
     </ul>
     <h2 id="section2">Admin Page</h2>
     <p>
