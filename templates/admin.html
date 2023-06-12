@@ -39,11 +39,11 @@
                   href="{{ url_for('api.update_user', user_id=user.id) }}"
                   method="get"
                   class="btn btn-warning"
-                  >Edit</a
+                  >Update</a
                 >
                 <a
-                  href="{{ url_for('api.delete_user', user_id=user.id) }}"
-                  method="POST"
+                  href="{{ url_for('api.confirm_delete_user', user_id=user.id) }}"
+                  method="get"
                   class="btn btn-danger"
                   >Delete</a
                 >
