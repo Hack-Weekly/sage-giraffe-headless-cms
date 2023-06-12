@@ -1,28 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="{{url_for('static', filename='css/index-styles.css')}}" />
-  <title>CMS Index</title>
-</head>
-
-<body>
-  <div class="container">
-    <div class="title"><a href="{{url_for('api.index')}}">Sage Giraffe CMS</a></div>
-    <div class="menu">
-      <a href="{{url_for('api.login')}}">Login</a>
-      <a href="{{url_for('api.admin')}}">Admin Dashboard</a>
-      <a href="{{url_for('api.content')}}">Content Dashboard</a>
-    </div>
-
-    <div class="center">
-      <img src="{{url_for('static', filename='images/sageGiraffeReading.png')}}" alt="A wise old giraffe reading"
-        class="giraffe" />
-    </div>
+{% extends 'base.html' %} {% block head %}
+<title>CMS Index</title>
+<link rel="stylesheet" href="{{url_for('static', filename='css/index-styles.css')}}" />
+{% endblock %} {% block body %}
+<div class="container index" id="girraffe-pic">
+  <div class="center">
+    <img src="{{url_for('static', filename='images/sageGiraffeReading.png')}}" alt="A wise old giraffe reading"
+      class="giraffe" />
   </div>
-</body>
+</div>
+<div class="container index" id="documentation-part">
+  <div class="index-bar">
+    <h1>Table of Contents</h1>
+    <ul>
+      <li id="main"><a href="#section1">How To Use It</a></li>
+      <li>
+        <a id="main" href="#section5">Features</a>
+        <ul>
+          <a href="#sub-section1">
+            <li class="sub-index">I. User Authentication</li>
+          </a>
+          <a href="#sub-section2">
+            <li class="sub-index">II. User Management</li>
+          </a>
+          <a href="#sub-section3">
+            <li class="sub-index">III. Content Management</li>
+          </a>
+          <a href="#sub-section4">
+            <li class="sub-index">IV. Routing and Page Rendering</li>
+          </a>
+        </ul>
+      </li>
+      <li id="main"><a href="#section2">Admin Page</a></li>
+      <li id="main"><a href="#section3">Content Page</a></li>
+      <li id="main"><a href="#section4">LogIn/Registration</a></li>
+    </ul>
+  </div>
+  <div class="documentation-section">
+    <h1>Documentation Section</h1>
+    <h2 id="section1">How To Use It</h2>
+    <p>
+      Our Headless CMS was structured to be used by any costumer in any type of
+      product. Through our thoughfully engineered architecture, we provide a
+      platform for all your needs.
+    </p>
 
-</html>
+    <h2 id="section5">Features</h2>
+    <p>
+    <h3 id="sub-section1">I. User Authentication and Authorization: </h3>
+    <ul>
+      <li>Registration: Users can register with a username, password, and role.</li>
+      <li>Login: Users can log in with their credentials, and the CMS verifies the username and hashed password.</li>
+      <li>Logout: Users can log out from their current session.</li>
+    </ul>
+    </p>
+    <p>
+    <h3 id="sub-section2">II. User Management: </h3>
+    <ul>
+      <li>Admin Dashboard: An admin user has access to an admin dashboard.</li>
+      <li>User Listing: Admin users can view a list of all registered users, sorted by the last login timestamp.</li>
+      <li>Add User: Admin users can add new users to the CMS.</li>
+      <li> Update User: Admin users can update the username, password, and role of any user.</li>
+      <li>Delete User: Admin users can delete a user from the CMS.</li>
+      </p>
+    </ul>
+    <h3 id="sub-section3">III. Content Management: </h3>
+    <ul>
+      <li>Content Dashboard: Authenticated users can access a content dashboard.</li>
+      <li>View Content: Authenticated users can view a list of all contents, sorted by creation date.</li>
+      <li>Add Content: Authenticated users can create new content by providing a title and body.</li>
+      <li>Update Content: Authenticated users can edit the title and body of their existing content.</li>
+      <li>Delete Content: Authenticated users can delete their own content.</li>
+    </ul>
+    <h3 id="sub-section4">IV. Routing and Page Rendering:</h3>
+    <ul>
+      <li>Index Route: Renders the default index.html template.</li>
+      <li>Login Route: Renders the login page template and handles user authentication.</li>
+      <li>Logout Route: Logs out the user and redirects to the index route.</li>
+      <li>Register Route: Handles user registration and redirects to the admin dashboard upon successful registration.
+      </li>
+      <li>Admin Dashboard Route: Renders the admin dashboard template and displays the list of registered users.</li>
+      <li>Content Dashboard Route: Renders the content dashboard template and displays the list of contents.</li>
+      <li>Add Content Route: Renders the add content template and handles the creation of new content.</li>
+      <li>Update Content Route: Renders the edit content template and handles the updating of existing content.</li>
+      <li>Delete Content Route: Handles the deletion of content.</li>
+      <li>Add User Route: Renders the add user template for admin users to add new users.</li>
+      <li>Update User Route: Renders the edit user template and handles the updating of user details.</li>
+      <li>Delete User Route: Handles the deletion of a user.</li>
+      <li>404 Route: Renders a custom 404.html template for invalid routes.</li>
+    </ul>
+    <h2 id="section2">Admin Page</h2>
+    <p>
+      Etiam consequat tellus tellus, id bibendum justo eleifend sed. Fusce
+      fermentum libero a fringilla dapibus.
+    </p>
+
+    <h2 id="section3">Content Page</h2>
+    <p>
+      Nunc eu tincidunt tellus, ut scelerisque lorem. Sed tincidunt turpis id
+      risus tincidunt feugiat.
+    </p>
+
+    <h2 id="section4">LogIn/Registration</h2>
+    <p>
+      Phasellus ac tristique enim, et ultrices enim. In dapibus nulla id urna
+      malesuada, id interdum elit vestibulum.
+    </p>
+  </div>
+</div>
+{% endblock %}

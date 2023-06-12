@@ -1,3 +1,11 @@
+.container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  background-color: #16B199;
+}
+
 .title {
   font-size: 3rem;
   font-weight: bold;
@@ -32,8 +40,4 @@
   margin-left: auto;
   margin-right: auto;
   width: 35%;
-}
-
-.container {
-  margin: auto;
 }

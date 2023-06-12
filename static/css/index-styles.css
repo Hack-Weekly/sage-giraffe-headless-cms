@@ -3,6 +3,10 @@
   margin: 0;
   padding: 0;
   text-align: center;
+  background-color: white;
+  margin-top: 2rem;
+  border-radius: 8px;
+  display: flex;
 }
 
 .title {
@@ -15,6 +19,8 @@
 .menu {
   font-size: 2rem;
   padding-bottom: 50px;
+  background-color: #16B199;
+  background: #16B199;
 }
 
 .center {
@@ -26,4 +32,126 @@
 .giraffe {
   width: 35%;
   height: auto;
+}
+
+a.navbar-brand:hover {
+  background-color: #16B199;
+  padding: 5px;
+  border-radius: 8px;
+  color: white;
+  transition: 0.2s;
+}
+
+.nav-link:hover {
+  background-color: #16B199;
+  padding: 5px;
+  border-radius: 8px;
+  transition: 0.2s;
+  color: white !important;
+  padding: 5px;
+  transform: scale(1.05);
+}
+
+.nav-link {
+  border-radius: 8px;
+  color: black;
+}
+
+body {
+  background-color: #16B199 !important;
+  scroll-behavior: smooth;
+}
+
+.index-bar {
+  width: 30%;
+  height: 100%;
+}
+
+.documentation-section {
+  width: 70%;
+  height: 100%;
+  border-left: 2px solid black;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  padding-top: 2rem;
+  text-align: left;
+}
+
+.index-bar {
+  padding-left: 3rem;
+  padding-right: 1rem;
+  padding-top: 2rem;
+  text-align: left;
+}
+
+.index-bar h2 {
+  margin-top: 0;
+}
+
+.index-bar li {
+  font-size: 22px;
+}
+
+.index-bar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.index-bar a {
+  display: block;
+  margin-bottom: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+.index-bar a:hover {
+  color: #16B199;
+}
+
+.index {
+  margin: auto;
+}
+
+#girraffe-pic {
+  margin-top: 2rem;
+}
+
+#documentation-part {
+  margin-top: 2rem;
+}
+
+.sub-index {
+  font-size: 18px !important;
+}
+
+#main {
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 767px) {
+  .container {
+    width: 100%;
+    /* Adjust the container width to fit the screen */
+  }
+
+  .giraffe {
+    max-width: 100%;
+    /* Make the giraffe image fit the screen width */
+  }
+
+  .index-bar {
+    text-align: center;
+    /* Center the index bar text */
+  }
+
+  .documentation-section {
+    padding: 10px;
+    /* Add some padding around the documentation section */
+  }
+
+  .sub-index {
+    margin-left: 10px;
+    /* Add indentation for sub-index items */
+  }
 }

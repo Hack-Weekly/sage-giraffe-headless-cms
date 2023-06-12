@@ -1,10 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Content page</title>
-</head>
-<body>
-   <h1>Content page</h1>
-</body>
-</html>
+{% extends 'base.html' %} {% block head %}
+
+<title>Content Dashboard</title>
+{% endblock %} {% block body %}
+<div class="container mt-4">
+  <div class="w-75 mx-auto">
+    <div class="card m-4 p-4">
+      <div class="row">
+        <div class="col-6">
+          <h2>Current Posts</h2>
+        </div>
+        <div class="col-6">
+          <a href="{{ url_for('api.add_content') }}" class="btn btn-success"
+            >New Post</a
+          >
+        </div>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Post</th>
+            <th scope="col">Date Created</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for content in contents %}
+          <tr>
+            <th>{{content.title}}</th>
+            <th>{{content.user.username}}</th>
+            <th>{{content.body}}</th>
+            <th>{{content.createdAt.strftime("%m-%d-%Y")}}</th>
+            <th>
+              <div class="btn-group btn-group-sm" role="group">
+                <a
+                  method="get"
+                  href="{{ url_for('api.update_content', post_id=content.id) }}"
+                  class="btn btn-warning"
+                >
+                  Update
+                </a>
+                <a
+                  method="post"
+                  href="{{ url_for('api.confirm_delete_content', post_id=content.id) }}"
+                  class="btn btn-danger"
+                >
+                  Delete
+                </a>
+              </div>
+            </th>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
