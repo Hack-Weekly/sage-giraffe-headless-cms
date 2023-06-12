@@ -71,14 +71,25 @@ body {
   width: 70%;
   height: 100%;
   border-left: 2px solid black;
+  padding-left: 5rem;
+  padding-right: 5rem;
+  padding-top: 2rem;
+  text-align: left;
 }
 
 .index-bar {
-  padding: 10px;
+  padding-left: 3rem;
+  padding-right: 1rem;
+  padding-top: 2rem;
+  text-align: left;
 }
 
 .index-bar h2 {
   margin-top: 0;
+}
+
+.index-bar li {
+  font-size: 22px;
 }
 
 .index-bar ul {
@@ -96,4 +107,20 @@ body {
 
 .index-bar a:hover {
   color: #16B199;
+}
+
+.index {
+  margin: auto;
+}
+
+#girraffe-pic {
+  margin-top: 2rem;
+}
+
+#documentation-part {
+  margin-top: 2rem;
+}
+
+.sub-index {
+  font-size: 18px !important;
 }

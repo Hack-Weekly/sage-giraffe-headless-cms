@@ -1,24 +1,32 @@
 {% extends 'base.html' %} {% block head %}
 <title>CMS Index</title>
-<link
-  rel="stylesheet"
-  href="{{url_for('static', filename='css/index-styles.css')}}"
-/>
+<link rel="stylesheet" href="{{url_for('static', filename='css/index-styles.css')}}" />
 {% endblock %} {% block body %}
-<div class="container index">
+<div class="container index" id="girraffe-pic">
   <div class="center">
-    <img
-      src="{{url_for('static', filename='images/sageGiraffeReading.png')}}"
-      alt="A wise old giraffe reading"
-      class="giraffe"
-    />
+    <img src="{{url_for('static', filename='images/sageGiraffeReading.png')}}" alt="A wise old giraffe reading"
+      class="giraffe" />
   </div>
 </div>
-<div class="container index">
+<div class="container index" id="documentation-part">
   <div class="index-bar">
-    <h2>Table of Contents</h2>
+    <h1>Table of Contents</h1>
     <ul>
       <li><a href="#section1">How To Use It</a></li>
+      <li>
+        <a href="#section5">Features</a>
+        <ul>
+          <a href="#sub-section1">
+            <li class="sub-index">I. User Authentication</li>
+          </a>
+          <a href="#sub-section2">
+            <li class="sub-index">II. User Management</li>
+          </a>
+          <a href="#sub-section3">
+            <li class="sub-index">I. Content Management</li>
+          </a>
+        </ul>
+      </li>
       <li><a href="#section2">Admin Page</a></li>
       <li><a href="#section3">Content Page</a></li>
       <li><a href="#section4">LogIn/Registration</a></li>
@@ -33,6 +41,33 @@
       platform for all your needs.
     </p>
 
+    <h2 id="section5">Features</h2>
+    <p>
+    <h3 id="sub-section1">I. User Authentication and Authorization: </h3>
+    <ul>
+      <li>Registration: Users can register with a username, password, and role.</li>
+      <li>Login: Users can log in with their credentials, and the CMS verifies the username and hashed password.</li>
+      <li>Logout: Users can log out from their current session.</li>
+    </ul>
+    </p>
+    <p>
+    <h3 id="sub-section2">II. User Management: </h3>
+    <ul>
+      <li>Admin Dashboard: An admin user has access to an admin dashboard.</li>
+      <li>User Listing: Admin users can view a list of all registered users, sorted by the last login timestamp.</li>
+      <li>Add User: Admin users can add new users to the CMS.</li>
+      <li> Update User: Admin users can update the username, password, and role of any user.</li>
+      <li>Delete User: Admin users can delete a user from the CMS.</li>
+      </p>
+    </ul>
+    <h3 id="sub-section3">III. Content Management: </h3>
+    <ul>
+      <li>Content Dashboard: Authenticated users can access a content dashboard.</li>
+      <li>View Content: Authenticated users can view a list of all contents, sorted by creation date.</li>
+      <li>Add Content: Authenticated users can create new content by providing a title and body.</li>
+      <li>Update Content: Authenticated users can edit the title and body of their existing content.</li>
+      <li>Delete Content: Authenticated users can delete their own content.</li>
+    </ul>
     <h2 id="section2">Admin Page</h2>
     <p>
       Etiam consequat tellus tellus, id bibendum justo eleifend sed. Fusce
