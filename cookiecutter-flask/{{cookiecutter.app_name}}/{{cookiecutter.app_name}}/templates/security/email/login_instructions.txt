@@ -1,7 +1,0 @@
-{% raw %}
-Welcome {{ user.email }}!
-
-You can log into your through the link below:
-
-{{ login_link }}
-{% endraw %}
