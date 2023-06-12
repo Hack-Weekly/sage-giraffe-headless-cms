@@ -1,7 +1,7 @@
 # Imports of flask and SQLALCHEMY all done within virtualenv 
 from flask import Flask
 from models import db
-from routes import api
+from routes import cms
 from flask_login import LoginManager
 from models import User
 
@@ -29,7 +29,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 db.init_app(app)
 
 #Register blueprint
-app.register_blueprint(api)
+app.register_blueprint(cms)
 
 # Used to create the database
 with app.app_context():

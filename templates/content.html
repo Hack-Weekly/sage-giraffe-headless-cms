@@ -10,7 +10,7 @@
           <h2>Current Posts</h2>
         </div>
         <div class="col-6">
-          <a href="{{ url_for('api.add_content') }}" class="btn btn-success"
+          <a href="{{ url_for('cms.add_content') }}" class="btn btn-success"
             >New Post</a
           >
         </div>
@@ -37,14 +37,14 @@
               <div class="btn-group btn-group-sm" role="group">
                 <a
                   method="get"
-                  href="{{ url_for('api.update_content', post_id=content.id) }}"
+                  href="{{ url_for('cms.update_content', post_id=content.id) }}"
                   class="btn btn-warning"
                 >
                   Update
                 </a>
                 <a
                   method="post"
-                  href="{{ url_for('api.confirm_delete_content', post_id=content.id) }}"
+                  href="{{ url_for('cms.confirm_delete_content', post_id=content.id) }}"
                   class="btn btn-danger"
                 >
                   Delete

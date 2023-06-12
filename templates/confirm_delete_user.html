@@ -9,7 +9,7 @@
       <div class="d-flex flex-column flex-sm-row justify-content-end">
         <div class="">
           <form
-            action="{{ url_for('api.delete_user', user_id=user.id) }}"
+            action="{{ url_for('cms.delete_user', user_id=user.id) }}"
             method="post"
           >
             <input
@@ -20,7 +20,7 @@
           </form>
         </div>
         <div class="">
-          <a href="{{ url_for('api.admin') }}" class="btn btn-secondary m-1"
+          <a href="{{ url_for('cms.admin') }}" class="btn btn-secondary m-1"
             >Cancel</a
           >
         </div>
