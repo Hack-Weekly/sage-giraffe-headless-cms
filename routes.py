@@ -158,6 +158,13 @@ def delete_content(post_id):
     db.session.commit()
     return redirect(url_for('api.content'))
 
+#Route to confirm delete content
+@api.route('/content/confirm_delete/<int:post_id>', methods=['GET'])
+@login_required
+def confirm_delete_content(post_id):
+    content = Content.query.get_or_404(post_id)
+    return render_template('confirm_delete_content.html', content=content)
+
 #Route for add user from admin dashboard
 @api.route('/admin/add_user', methods=['GET'])
 @login_required
@@ -189,6 +196,13 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
     return redirect(url_for('api.admin'))
+
+#Route to confirm delete user
+@api.route('/admin/confirm_delete/<int:user_id>', methods=['GET'])
+@login_required
+def confirm_delete_user(user_id):
+    user = User.query.get_or_404(user_id)
+    return render_template('confirm_delete_user.html', user=user)
 
 
 #Missing Page 404 route

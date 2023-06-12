@@ -30,7 +30,7 @@
           {% for content in contents %}
           <tr>
             <th>{{content.title}}</th>
-            <th>{{content.userId}}</th>
+            <th>{{content.user.username}}</th>
             <th>{{content.body}}</th>
             <th>{{content.createdAt.strftime("%m-%d-%Y")}}</th>
             <th>
@@ -44,7 +44,7 @@
                 </a>
                 <a
                   method="post"
-                  href="{{ url_for('api.delete_content', post_id=content.id) }}"
+                  href="{{ url_for('api.confirm_delete_content', post_id=content.id) }}"
                   class="btn btn-danger"
                 >
                   Delete
