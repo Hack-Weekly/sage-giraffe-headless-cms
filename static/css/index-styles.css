@@ -124,3 +124,34 @@ body {
 .sub-index {
   font-size: 18px !important;
 }
+
+#main {
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 767px) {
+  .container {
+    width: 100%;
+    /* Adjust the container width to fit the screen */
+  }
+
+  .giraffe {
+    max-width: 100%;
+    /* Make the giraffe image fit the screen width */
+  }
+
+  .index-bar {
+    text-align: center;
+    /* Center the index bar text */
+  }
+
+  .documentation-section {
+    padding: 10px;
+    /* Add some padding around the documentation section */
+  }
+
+  .sub-index {
+    margin-left: 10px;
+    /* Add indentation for sub-index items */
+  }
+}
