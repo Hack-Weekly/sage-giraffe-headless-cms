@@ -21,6 +21,34 @@ def index():
 def docs():
     return render_template('docs.html')
 
+@cms.route('/log', methods=['GET'])
+@login_required
+def log():
+    sort_column = request.args.get('sort', 'timestamp')
+    sort_order = request.args.get('order', 'asc')
+
+    def toggle_order(column):
+        if sort_column == column and sort_order == 'asc':
+            return 'desc'
+        return 'asc'
+
+    if sort_column == 'id':
+        sort_attr = Log.id
+    elif sort_column == 'user':
+        sort_attr = User.username
+    elif sort_column == 'action':
+        sort_attr = Log.action
+    else:
+        sort_attr = Log.timestamp
+
+    if sort_order == 'desc':
+        sort_attr = sort_attr.desc()
+
+    logs = Log.query.join(Log.user).order_by(sort_attr).all()
+
+    return render_template('log.html', logs=logs, sort_column=sort_column, sort_order=sort_order, toggle_order=toggle_order)
+
+
 #Route for Login page
 @cms.route('/login', methods=['GET', 'POST']) 
 def login():

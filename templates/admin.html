@@ -16,6 +16,9 @@
           <a href="{{ url_for('cms.add_user') }}" class="btn btn-success"
             >Add User</a
           >
+          <a href="{{ url_for('cms.log') }}" class="btn btn-success"
+            >View Activity Log</a
+          >
         </div>
       </div>
       <table class="table">
@@ -49,16 +52,6 @@
                 >
               </div>
             </th>
-          </tr>
-          <tr>
-            <td colspan="4">
-              <strong>Activity Log:</strong>
-              <ul>
-                {% for log in user.logs %}
-                <li>{{ log.timestamp }} - {{ log.action }}</li>
-                {% endfor %}
-              </ul>
-            </td>
           </tr>
           {% endfor %}
         </tbody>
