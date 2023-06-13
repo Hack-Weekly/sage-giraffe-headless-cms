@@ -17,6 +17,10 @@ bcrypt = Bcrypt()
 def index():
     return render_template('index.html')
 
+@cms.route('/docs')
+def docs():
+    return render_template('docs.html')
+
 #Route for Login page
 @cms.route('/login', methods=['GET', 'POST']) 
 def login():
