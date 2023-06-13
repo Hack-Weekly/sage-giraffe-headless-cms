@@ -18,7 +18,8 @@ def apiTest():
         key = content.id
         value = {"title": content.title,
                  "body": content.body,
-                 "createdAt": content.createdAt}
+                 "createdAt": content.createdAt,
+                 "author": content.user.username}
         data[key]=value
     return jsonify(data)
 
@@ -31,11 +32,11 @@ def get_content_by_limit(limit):
         value = {
             "title": content.title,
             "body": content.body,
-            "createdAt": content.createdAt
+            "createdAt": content.createdAt,
+            "author": content.user.username
         }
         data[key] = value
     return jsonify(data)
-
 
 @api.route('/api/content/id/<int:content_id>', methods=['GET'])
 def get_content_by_id(content_id):
@@ -44,7 +45,8 @@ def get_content_by_id(content_id):
         data = {
             "title": content.title,
             "body": content.body,
-            "createdAt": content.createdAt
+            "createdAt": content.createdAt,
+            "author": content.user.username
         }
         return jsonify(data)
     else:
