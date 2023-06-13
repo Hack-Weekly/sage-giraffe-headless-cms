@@ -2,6 +2,7 @@
 from flask import Flask
 from models import db
 from routes import cms
+from routes_api import api
 from flask_login import LoginManager
 from models import User
 
@@ -30,6 +31,7 @@ db.init_app(app)
 
 #Register blueprint
 app.register_blueprint(cms)
+app.register_blueprint(api)
 
 # Used to create the database
 with app.app_context():
