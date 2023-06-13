@@ -7,7 +7,7 @@
     margin-top: 2rem;
     border-radius: 8px;
     display: flex;
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
 }
 
 .title {
@@ -155,4 +155,8 @@ body {
         margin-left: 10px;
         /* Add indentation for sub-index items */
     }
+}
+
+#documentation-part {
+    margin-bottom: 2rem;
 }
