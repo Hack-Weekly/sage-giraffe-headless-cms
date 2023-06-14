@@ -114,11 +114,8 @@ def register():
                     log_entry = Log(user_id=new_user.id, action=f'Registered new user: {username}')
                     db.session.add(log_entry)
                     db.session.commit()
-
-                    if current_user.role == 'admin' or (not current_user and role == 'admin'):
-                        return redirect(url_for('cms.admin'))
-                    else:
-                        return redirect(url_for('cms.index'))
+                    
+                    return redirect(url_for('cms.index'))
                 except Exception as e:
                     print("There was an error adding your user:", e)
                     return render_template('login.html', error=e, register=True)
