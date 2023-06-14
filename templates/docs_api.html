@@ -5,8 +5,7 @@
   <div class="w-75 mx-auto">
     <div class="card p-4">
       <h1>API Documentation</h1>
-      <p>The follow is a break down of the API end points made availble</p>
-      <div id="content"></div>
+      <p>The follow is a break down of the API end points made available</p>
       <div class="accordion" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
@@ -45,40 +44,4 @@
     </div>
   </div>
 </div>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var contentDiv = document.getElementById("content");
-
-    // Send GET request to /api/content/all
-    fetch("/api/content/all")
-      .then(function(data) {
-        // Display content data
-        // console.log(data);
-
-
-        for (var key in data) {
-          console.log(key)
-          console.log(data);
-          if (data.hasOwnProperty(key)) {
-            var content = data[key];
-            var contentHTML = `
-              <h2>${content.title}</h2>
-              <p>${content.body}</p>
-              <p>Created at: ${content.createdAt}</p>
-              <p>Author: ${content.author}</p>
-              <hr>
-            `;
-            contentDiv.innerHTML += contentHTML;
-          }
-          else {
-            console.log(data[key]);
-          }
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  });
-</script>
 {% endblock %}
