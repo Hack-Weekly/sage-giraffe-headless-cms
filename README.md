@@ -4,7 +4,7 @@
 ![Alt text](image.png)
 
 ## Team: Sage Giraffe <br>
-## Team Members:
+### Team Members:
 - Casallas (https://github.com/DrMJK)
 - Dev (https://github.com/devv64)
 - Munnu (https://github.com/Manveer-Saini)
