@@ -1,23 +1,47 @@
-{% extends 'base.html' %} {% block head %}
+{% extends 'base.html' %} 
+{% block head %}
 <title>New User</title>
-{% endblock %} {% block body %}
+
+<!-- <script>
+  function getAllContent() {
+      fetch('http://127.0.0.1:5000/api/allcontent',)
+          .then(response => response.json())
+          .then(data => {
+              // Convert the fetched data to JSON string
+              const jsonData = JSON.stringify(data);
+
+              // Display the JSON string in an HTML element
+              const allContentBody = document.getElementById('all-content');
+              allContentBody.textContent = jsonData;
+              console.log(jsonData);
+          })
+          // .then(data => console.log(data.json))
+          .catch(error => {
+              // Handle errors
+              console.error(error);
+          });
+  }
+</script> -->
+{% endblock %} 
+{% block body %}
 <div class="container mt-4">
   <div class="w-75 mx-auto">
     <div class="card p-4">
       <h1>API Documentation</h1>
-      <p>The follow is a break down of the API end points made availble</p>
+      <p>The follow is a break down of the API end points made available</p>
       <div class="accordion" id="accordionExample">
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button
               class="accordion-button"
               type="button"
+              onclick="getAllContent()"
               data-bs-toggle="collapse"
               data-bs-target="#endpointOne"
               aria-expanded="true"
               aria-controls="endpointOne"
             >
-              Request all posts: /api/allcountent
+              Request all posts: /api/allcontent
             </button>
           </h2>
           <div
@@ -25,7 +49,25 @@
             class="accordion-collapse collapse show"
             data-bs-parent="#accordionExample"
           >
-            <div class="accordion-body">Info</div>
+            <pre class="accordion-body" id="all-content">  [
+              {
+                  id:1,
+                  body:'...',
+                  createdAt:'...',
+                  category:'...',
+                  description:'...',
+                  image:'...'
+              },
+              /*...*/
+              {
+                  id:30,
+                  title:'...',
+                  price:'...',
+                  category:'...',
+                  description:'...',
+                  image:'...'
+              }
+          ]</pre>
           </div>
         </div>
         <div class="accordion-item">

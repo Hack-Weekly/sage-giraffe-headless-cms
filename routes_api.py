@@ -2,8 +2,8 @@
 from flask import Blueprint, render_template, request, url_for, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from models import User, Content, Log, db
-from flask_bcrypt import Bcrypt
-from sqlalchemy.exc import IntegrityError
+import collections
+
 
 #Create Flask blueprint object
 api = Blueprint('api', __name__)
@@ -13,19 +13,34 @@ api = Blueprint('api', __name__)
 @api.route('/api/allcontent')
 def apiTest():
     allContent = Content.query.all()
-    data ={}
+    data = []
     for content in allContent:
-        key = content.id
-        value = {"title": content.title,
-                 "body": content.body,
-                 "createdAt": content.createdAt}
-        data[key]=value
+        # key = content.id
+        value = collections.OrderedDict()
+        value["id"] = content.id
+        value["title"] = content.title
+        value["body"] = content.body
+        value["createdAt"] = content.createdAt
+        value["author"] = content.user.username
+
+
+
+
+        # {
+        #             "id": content.id,
+        #             "title": content.title,
+        #             "body": content.body,
+        #             "createdAt": content.createdAt,
+        #             "author": content.user.username
+        #         }
+        # data[key]=value
+        data.append(value)
     return jsonify(data)
 
 @api.route('/api/content/limit/<int:limit>', methods=['GET'])
 def get_content_by_limit(limit):
     all_content = Content.query.limit(limit).all()
-    data = {}
+    data = []
     for content in all_content:
         key = content.id
         value = {
@@ -33,7 +48,8 @@ def get_content_by_limit(limit):
             "body": content.body,
             "createdAt": content.createdAt
         }
-        data[key] = value
+        # data[key] = value
+        data.append(value)
     return jsonify(data)
 
 
