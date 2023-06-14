@@ -1,6 +1,5 @@
 # Imports of flask and SQLALCHEMY all done within virtualenv 
-from flask import Blueprint, render_template, request, url_for, redirect, jsonify
-from flask_sqlalchemy import SQLAlchemy
+from flask import Blueprint, render_template, request, url_for, redirect
 from models import User, Content, Log, db
 from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError
@@ -69,10 +68,14 @@ def login():
                 return redirect(url_for('cms.content'))
             # if not make the user login again
             else:
-                return render_template('login.html', error="Invalid username/password")
+                return render_template('login.html', error="Invalid username/password", login=True)
         except Exception as e:
-            return render_template('login.html', error=e)
-    return render_template('login.html')
+            return render_template('login.html', error=e, login=True)
+    login_param = request.args.get('login')
+    register_param = request.args.get('register')
+    login = login_param == 'true'
+    register = register_param == 'true'
+    return render_template('login.html', login=login, register=register)
 
 # Route for Logout
 @cms.route('/logout')
@@ -84,46 +87,98 @@ def logout():
 @cms.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        role = request.form['role']
-        # Perform registration logic here
-
-        hash_password = bcrypt.generate_password_hash(password).decode('utf-8')
-
-        existing_user = db.session.query(User).filter_by(username=username).first()
-
-        # If user does exist then return to registration/login page with error
-        if(existing_user):
-            print("User already exists")
-            error = 'Username is already taken, please choose a different one.'
-            return render_template('login.html', error=error)
-        
         try:
-            # Create the User and add to database
-            new_user = User(username=username, password=hash_password, role=role)
-            db.session.add(new_user)
+            username = request.form['username']
+            password = request.form['password']
+            role = request.form['role']
+            # Perform registration logic here
 
+            hash_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+            existing_user = db.session.query(User).filter_by(username=username).first()
+
+            # If user does exist then return to registration/login page with error
+            if(existing_user):
+                print("User already exists")
+                error = 'Username is already taken, please choose a different one.'
+                return render_template('login.html', error=error, register=True)
+            
             try:
-                db.session.commit()
+                # Create the User and add to database
+                new_user = User(username=username, password=hash_password, role=role)
+                db.session.add(new_user)
 
-                log_entry = Log(user_id=new_user.id, action=f'Registered new user: {username}')
-                db.session.add(log_entry)
-                db.session.commit()
+                try:
+                    db.session.commit()
 
-                if current_user.role == 'admin' or (not current_user and role == 'admin'):
-                    return redirect(url_for('cms.admin'))
-                else:
-                    return redirect(url_for('cms.index'))
-            except:
-                return "There was an error adding your user"
+                    log_entry = Log(user_id=new_user.id, action=f'Registered new user: {username}')
+                    db.session.add(log_entry)
+                    db.session.commit()
 
-        except IntegrityError:
-            # If any database integrity error occurs handle it here
-            print("Error in registration")
-            error = "Error in registraton, please try again."
-            return render_template('login.html', error=error)
-    return render_template('login.html')
+                    if current_user.role == 'admin' or (not current_user and role == 'admin'):
+                        return redirect(url_for('cms.admin'))
+                    else:
+                        return redirect(url_for('cms.index'))
+                except Exception as e:
+                    print("There was an error adding your user:", e)
+                    return render_template('login.html', error=e, register=True)
+
+            except IntegrityError:
+                # If any database integrity error occurs handle it here
+                print("Error in registration")
+                error = "Error in registraton, please try again."
+                return render_template('login.html', error=error, register=True)
+        except Exception as e:
+            return render_template('login.html', error=e, register=True)
+    return render_template('login.html', register=True)
+
+# Route for Register
+@cms.route('/add_new_user', methods=['GET', 'POST'])
+def add_new_user():
+    if request.method == 'POST':
+        try:
+            username = request.form['username']
+            password = request.form['password']
+            role = request.form['role']
+            # Perform registration logic here
+
+            hash_password = bcrypt.generate_password_hash(password).decode('utf-8')
+
+            existing_user = db.session.query(User).filter_by(username=username).first()
+
+            # If user does exist then return to registration/login page with error
+            if(existing_user):
+                print("User already exists")
+                error = 'Username is already taken, please choose a different one.'
+                return render_template('add_user.html', error=error)
+            
+            try:
+                # Create the User and add to database
+                new_user = User(username=username, password=hash_password, role=role)
+                db.session.add(new_user)
+
+                try:
+                    db.session.commit()
+
+                    log_entry = Log(user_id=new_user.id, action=f'Registered new user: {username}')
+                    db.session.add(log_entry)
+                    db.session.commit()
+
+                    if current_user.role == 'admin' or (not current_user and role == 'admin'):
+                        return redirect(url_for('cms.admin'))
+                    else:
+                        return redirect(url_for('cms.add_user'))
+                except:
+                    return "There was an error adding your user"
+
+            except IntegrityError:
+                # If any database integrity error occurs handle it here
+                print("Error in registration")
+                error = "Error in registraton, please try again."
+                return render_template('add_user.html', error=error)
+        except Exception as e:
+            return render_template('add_user.html', error=e)
+    return render_template('add_user.html')
 
 #Route for admin dashboard
 @cms.route('/admin', methods=['GET', 'POST'])
@@ -140,7 +195,6 @@ def admin():
 @login_required
 def content():
     if request.method == 'POST':
-        print(request.form)
         title = request.form['title']
         body = request.form['body']
         userId = current_user.id
@@ -149,7 +203,6 @@ def content():
         db.session.add(new_content)
         db.session.commit()
 
-        print("New content added")
         return redirect(url_for('cms.content'))
     if current_user.is_authenticated:
         contents = Content.query.order_by(Content.createdAt.desc()).all()

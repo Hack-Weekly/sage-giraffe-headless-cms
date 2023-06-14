@@ -69,7 +69,7 @@
               >Logout</a
             >
             {% else %}
-            <a href="{{url_for('cms.login')}}" class="btn btn-outline-success"
+            <a href="{{url_for('cms.login', register='false', login='true')}}" class="btn btn-outline-success"
               >Login</a
             >
             {% endif %}

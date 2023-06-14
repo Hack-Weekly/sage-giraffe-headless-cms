@@ -4,10 +4,13 @@
 <div class="container mt-4">
   <div class="w-75 mx-auto">
     <div class="card p-4">
-      <form method="post" action="{{ url_for('cms.register') }}">
+      <form method="post" action="{{ url_for('cms.add_new_user') }}">
         <div>
           <h3>Create New User</h3>
         </div>
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
         <div class="row p-2">
           <div class="col-4 text-end">
             <label for="username" class="form-label">
