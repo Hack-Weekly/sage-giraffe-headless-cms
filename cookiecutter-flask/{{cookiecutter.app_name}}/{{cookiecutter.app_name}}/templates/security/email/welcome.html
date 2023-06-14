@@ -1,9 +1,0 @@
-{% raw %}
-<p>Welcome {{ user.email }}!</p>
-
-{% if security.confirmable %}
-<p>You can confirm your email through the link below:</p>
-
-<p><a href="{{ confirmation_link }}">Confirm my account</a></p>
-{% endif %}
-{% endraw %}

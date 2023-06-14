@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   margin: 0;
-  padding: 0;
+  padding: 2rem;
   text-align: center;
   background-color: white;
   margin-top: 2rem;
@@ -154,4 +154,17 @@ body {
     margin-left: 10px;
     /* Add indentation for sub-index items */
   }
+}
+
+.buttonZ {
+  padding: 1rem;
+  margin: 2rem;
+  font-size: 22px;
+  background-color: #16B199 !important;
+  border-color: #16B199 !important;
+}
+
+.buttonZ:hover {
+  background-color: #0F7B6B !important;
+  border-color: #0F7B6B !important;
 }

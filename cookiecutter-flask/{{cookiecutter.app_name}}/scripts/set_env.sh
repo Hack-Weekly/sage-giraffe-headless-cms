@@ -1,1 +1,0 @@
-export {{cookiecutter.app_name|upper}}_ENV='dev'

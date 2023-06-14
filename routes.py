@@ -1,24 +1,60 @@
 # Imports of flask and SQLALCHEMY all done within virtualenv 
 from flask import Blueprint, render_template, request, url_for, redirect, jsonify
 from flask_sqlalchemy import SQLAlchemy
-from models import User, Content, db
+from models import User, Content, Log, db
 from flask_bcrypt import Bcrypt
 from sqlalchemy.exc import IntegrityError
 
 from flask_login import login_required, current_user, login_user, logout_user
 
 #Create Flask blueprint object
-api = Blueprint('api', __name__)
+cms = Blueprint('cms', __name__)
 # db = SQLAlchemy()
 bcrypt = Bcrypt()
 
 #Simple default route for the index that pulls from the templates folder by default index.html
-@api.route('/')
+@cms.route('/')
 def index():
     return render_template('index.html')
 
+@cms.route('/docs')
+def docs():
+    return render_template('docs.html')
+
+@cms.route('/docs-api')
+def docs_api():
+    return render_template('docs_api.html')
+
+@cms.route('/log', methods=['GET'])
+@login_required
+def log():
+    sort_column = request.args.get('sort', 'timestamp')
+    sort_order = request.args.get('order', 'asc')
+
+    def toggle_order(column):
+        if sort_column == column and sort_order == 'asc':
+            return 'desc'
+        return 'asc'
+
+    if sort_column == 'id':
+        sort_attr = Log.id
+    elif sort_column == 'user':
+        sort_attr = User.username
+    elif sort_column == 'action':
+        sort_attr = Log.action
+    else:
+        sort_attr = Log.timestamp
+
+    if sort_order == 'desc':
+        sort_attr = sort_attr.desc()
+
+    logs = Log.query.join(Log.user).order_by(sort_attr).all()
+
+    return render_template('log.html', logs=logs, sort_column=sort_column, sort_order=sort_order, toggle_order=toggle_order)
+
+
 #Route for Login page
-@api.route('/login', methods=['GET', 'POST']) 
+@cms.route('/login', methods=['GET', 'POST']) 
 def login():
     if request.method == 'POST':
         try:
@@ -30,7 +66,7 @@ def login():
             # If username's password and inputted password match (hashed), log user in and route to content page
             if user and bcrypt.check_password_hash(user.password, password):
                 login_user(user)
-                return redirect(url_for('api.content'))
+                return redirect(url_for('cms.content'))
             # if not make the user login again
             else:
                 return render_template('login.html', error="Invalid username/password")
@@ -39,13 +75,13 @@ def login():
     return render_template('login.html')
 
 # Route for Logout
-@api.route('/logout')
+@cms.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('api.index'))
+    return redirect(url_for('cms.index'))
 
 # Route for Register
-@api.route('/register', methods=['GET', 'POST'])
+@cms.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         username = request.form['username']
@@ -65,18 +101,23 @@ def register():
         
         try:
             # Create the User and add to database
-            print("Creating new user")
             new_user = User(username=username, password=hash_password, role=role)
             db.session.add(new_user)
-            db.session.commit()
 
-            # This is some code to see if user is making it into db :)
-            all_users = db.session.query(User).all()
+            try:
+                db.session.commit()
 
-            for user in all_users:
-                print(f"ID: {user.id}, Username: {user.username}, Password: {user.password}, Role: {user.role}")
+                log_entry = Log(user_id=new_user.id, action=f'Registered new user: {username}')
+                db.session.add(log_entry)
+                db.session.commit()
 
-            return redirect(url_for('api.admin'))
+                if current_user.role == 'admin' or (not current_user and role == 'admin'):
+                    return redirect(url_for('cms.admin'))
+                else:
+                    return redirect(url_for('cms.index'))
+            except:
+                return "There was an error adding your user"
+
         except IntegrityError:
             # If any database integrity error occurs handle it here
             print("Error in registration")
@@ -85,17 +126,17 @@ def register():
     return render_template('login.html')
 
 #Route for admin dashboard
-@api.route('/admin', methods=['GET', 'POST'])
+@cms.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin():
     if current_user.role == 'admin':
         users = User.query.order_by(User.lastLogin.desc()).all()
         return render_template('admin.html', users=users)
     else:
-        return render_template('login.html', error="You are not authorized to view this page")
+        return render_template('index.html', error="You are not authorized to view this page")
 
 #Route for content dashboard
-@api.route('/content', methods=['GET', 'POST'])
+@cms.route('/content', methods=['GET', 'POST'])
 @login_required
 def content():
     if request.method == 'POST':
@@ -109,7 +150,7 @@ def content():
         db.session.commit()
 
         print("New content added")
-        return redirect(url_for('api.content'))
+        return redirect(url_for('cms.content'))
     if current_user.is_authenticated:
         contents = Content.query.order_by(Content.createdAt.desc()).all()
         return render_template('content.html', contents=contents)
@@ -117,7 +158,7 @@ def content():
         return render_template('login.html', error="You are not authorized to view this page")
 
 #Route to add content
-@api.route('/content/add', methods=['GET','POST'])
+@cms.route('/content/add', methods=['GET','POST'])
 @login_required
 def add_content():
     if request.method == 'POST':
@@ -127,14 +168,21 @@ def add_content():
 
         new_content = Content(title=title, body=body, userId=userId)
         db.session.add(new_content)
-        db.session.commit()
+        try:
+            db.session.commit()
 
-        return redirect(url_for('api.content'))
+            log_entry = Log(user_id=current_user.id, action=f'Added content: {title}')
+            db.session.add(log_entry)
+            db.session.commit()
+            return redirect(url_for('cms.content'))
+        except:
+            return "There was an error adding your content"
+
     if request.method == 'GET':
         return render_template('add_content.html')
 
 #Route to update content
-@api.route('/content/update/<int:post_id>', methods=['GET','POST'])
+@cms.route('/content/update/<int:post_id>', methods=['GET','POST'])
 @login_required
 def update_content(post_id):
     content = Content.query.get_or_404(post_id)
@@ -143,36 +191,47 @@ def update_content(post_id):
         content.body = request.form['body']
         try:
             db.session.commit()
-            return redirect(url_for('api.content'))
+
+            log_entry = Log(user_id=current_user.id, action=f'Updated content: {content.title}')
+            db.session.add(log_entry)
+            db.session.commit()
+            return redirect(url_for('cms.content'))
         except:
             return "There was an error updating your content"
     else:
         return render_template('edit_content.html', content=content)
 
 #Route to delete content
-@api.route('/content/delete/<int:post_id>', methods=['POST'])
+@cms.route('/content/delete/<int:post_id>', methods=['POST'])
 @login_required
 def delete_content(post_id):
     content = Content.query.get_or_404(post_id)
     db.session.delete(content)
-    db.session.commit()
-    return redirect(url_for('api.content'))
+    try:
+        db.session.commit()
+
+        log_entry = Log(user_id=current_user.id, action=f'Deleted content: {content.title}')
+        db.session.add(log_entry)
+        db.session.commit()
+        return redirect(url_for('cms.content'))
+    except:
+        return "There was an error deleting your content"
 
 #Route to confirm delete content
-@api.route('/content/confirm_delete/<int:post_id>', methods=['GET'])
+@cms.route('/content/confirm_delete/<int:post_id>', methods=['GET'])
 @login_required
 def confirm_delete_content(post_id):
     content = Content.query.get_or_404(post_id)
     return render_template('confirm_delete_content.html', content=content)
 
 #Route for add user from admin dashboard
-@api.route('/admin/add_user', methods=['GET'])
+@cms.route('/admin/add_user', methods=['GET'])
 @login_required
 def add_user():
     return render_template('add_user.html')
 
 #Route to update user
-@api.route('/admin/update/<int:user_id>', methods=['GET', 'POST'])
+@cms.route('/admin/update/<int:user_id>', methods=['GET', 'POST'])
 @login_required
 def update_user(user_id):
     user = User.query.get_or_404(user_id)
@@ -182,23 +241,45 @@ def update_user(user_id):
         user.role = request.form['role']
         try:
             db.session.commit()
-            return redirect(url_for('api.admin'))
+
+            log_entry = Log(user_id=current_user.id, action=f'Updated user: {user.username}')
+            db.session.add(log_entry)
+            db.session.commit()
+            return redirect(url_for('cms.admin'))
         except:
             return "There was an error updating your content"
     else:
         return render_template('edit_user.html', user=user)
 
 #Route to delete user
-@api.route('/admin/delete/<int:user_id>', methods=['POST'])
+@cms.route('/admin/delete/<int:user_id>', methods=['POST'])
 @login_required
 def delete_user(user_id):
     user = User.query.get_or_404(user_id)
+    # Delete all content associated with user
+    if user.contents:
+        for content in user.contents:
+            db.session.delete(content)
+
+    # Delete all activity logs associated with the user
+    if user.user_logs:
+        for log in user.user_logs:
+            db.session.delete(log)
+
     db.session.delete(user)
-    db.session.commit()
-    return redirect(url_for('api.admin'))
+
+    try:
+        db.session.commit()
+
+        log_entry = Log(user_id=current_user.id, action=f'Deleted user: {user.username}')
+        db.session.add(log_entry)
+        db.session.commit()
+        return redirect(url_for('cms.admin'))
+    except Exception as e:
+        return "There was an error deleting the user: " + str(e)
 
 #Route to confirm delete user
-@api.route('/admin/confirm_delete/<int:user_id>', methods=['GET'])
+@cms.route('/admin/confirm_delete/<int:user_id>', methods=['GET'])
 @login_required
 def confirm_delete_user(user_id):
     user = User.query.get_or_404(user_id)
@@ -206,7 +287,7 @@ def confirm_delete_user(user_id):
 
 
 #Missing Page 404 route
-@api.app_errorhandler(404)
+@cms.app_errorhandler(404)
 def invalid_route(e):
     return render_template('404.html')
 

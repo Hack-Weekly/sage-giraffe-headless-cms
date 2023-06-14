@@ -13,8 +13,11 @@
           <h2>Current Users</h2>
         </div>
         <div class="col-6">
-          <a href="{{ url_for('api.add_user') }}" class="btn btn-success"
+          <a href="{{ url_for('cms.add_user') }}" class="btn btn-success"
             >Add User</a
+          >
+          <a href="{{ url_for('cms.log') }}" class="btn btn-success"
+            >View Activity Log</a
           >
         </div>
       </div>
@@ -36,13 +39,13 @@
             <th>
               <div class="btn-group btn-group-sm" role="group">
                 <a
-                  href="{{ url_for('api.update_user', user_id=user.id) }}"
+                  href="{{ url_for('cms.update_user', user_id=user.id) }}"
                   method="get"
                   class="btn btn-warning"
                   >Update</a
                 >
                 <a
-                  href="{{ url_for('api.confirm_delete_user', user_id=user.id) }}"
+                  href="{{ url_for('cms.confirm_delete_user', user_id=user.id) }}"
                   method="get"
                   class="btn btn-danger"
                   >Delete</a

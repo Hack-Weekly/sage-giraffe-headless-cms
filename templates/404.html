@@ -1,12 +1,15 @@
 {% extends 'base.html' %} {% block head %}
 <title>Missing Page</title>
+<link rel="stylesheet" href = "{{url_for('static', filename='css/404-styles.css')}}" />
 {% endblock %} {% block body %}
+
 <div class="container">
-  <div class="title">404 Error - Opps something went wrong...</div>
+  <h1> 404 Error - Oops, something went wrong...</h1>
+
   <div class="menu">
-    <a href="{{url_for('api.login')}}">Login </a>
-    <a href="{{url_for('api.admin')}}">Admin Dashboard </a>
-    <a href="{{url_for('api.content')}}">Content Dashboard </a>
+    <a href="{{url_for('cms.login')}}">Login</a>
+    <a href="{{url_for('cms.admin')}}">Admin Dashboard</a>
+    <a href="{{url_for('cms.content')}}">Content Dashboard</a>
   </div>
 
   <div class="center">
