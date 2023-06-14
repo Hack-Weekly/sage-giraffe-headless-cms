@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends 'base.html' %} 
 {% block head %}
 <title>New User</title>
@@ -24,6 +25,11 @@
 </script> -->
 {% endblock %} 
 {% block body %}
+=======
+{% extends 'base.html' %} {% block head %}
+<title>API Documentation</title>
+{% endblock %} {% block body %}
+>>>>>>> dev
 <div class="container mt-4">
   <div class="w-75 mx-auto">
     <div class="card p-4">
@@ -72,43 +78,23 @@
         </div>
         <div class="accordion-item">
           <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#endpointTwo"
-              aria-expanded="false"
-              aria-controls="endpointTwo"
-            >
-            Request a limited number of posts : /api/content/limit/<int:limit> 
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#endpointTwo" aria-expanded="false" aria-controls="endpointTwo">
+              Request a limited number of posts : /api/content/limit/<int:limit>
             </button>
           </h2>
-          <div
-            id="endpointTwo"
-            class="accordion-collapse collapse"
-            data-bs-parent="#accordionExample"
-          >
+          <div id="endpointTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">info</div>
           </div>
         </div>
         <div class="accordion-item">
           <h2 class="accordion-header">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#endpointThree"
-              aria-expanded="false"
-              aria-controls="endpointThree"
-            >
-            Request a specific post : post/api/content/id/<int:content_id> 
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+              data-bs-target="#endpointThree" aria-expanded="false" aria-controls="endpointThree">
+              Request a specific post : post/api/content/id/<int:content_id>
             </button>
           </h2>
-          <div
-            id="endpointThree"
-            class="accordion-collapse collapse"
-            data-bs-parent="#accordionExample"
-          >
+          <div id="endpointThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">Info</div>
           </div>
         </div>

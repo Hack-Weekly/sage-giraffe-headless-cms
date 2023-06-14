@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block head %}
-<title>CMS Index</title>
+<title>CMS Documentation</title>
 <link rel="stylesheet" href="{{url_for('static', filename='css/documentation-styles.css')}}" />
 {% endblock %} {% block body %}
 <div class="container index" id="documentation-part">
@@ -89,20 +89,29 @@
         </ul>
         <h2 id="section2">Admin Page</h2>
         <p>
-            Etiam consequat tellus tellus, id bibendum justo eleifend sed. Fusce
-            fermentum libero a fringilla dcmsbus.
+            This admin dashboard page template provides a user-friendly interface for managing users within the
+            application. It allows administrators to create new users, view existing users' information, and perform
+            actions such as updating or deleting user records. They can also check the activity logs for users, which
+            indicate whether a user has added, updated, etc.
         </p>
 
         <h2 id="section3">Content Page</h2>
         <p>
-            Nunc eu tincidunt tellus, ut scelerisque lorem. Sed tincidunt turpis id
-            risus tincidunt feugiat.
+            The content page of our CMS provides a dashboard where the user can create a post with both a title and
+            a description. This created post will then show up on their dashboard, from which the user (admin) can
+            choose
+            to either update or delete this post.
         </p>
 
         <h2 id="section4">LogIn/Registration</h2>
         <p>
-            Phasellus ac tristique enim, et ultrices enim. In dcmsbus nulla id urna
-            malesuada, id interdum elit vestibulum.
+            This page allows the user to log in with an existing account, or register to our system through a simple
+            form.
+            Whenever registering, the user has the option to give themselves admin priviledges or normal writer
+            priviledges.
+            This choice will alter their experience using the CMS as you must be an admin to access certain content from
+            our
+            system.
         </p>
     </div>
 </div>
