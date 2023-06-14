@@ -155,3 +155,16 @@ body {
     /* Add indentation for sub-index items */
   }
 }
+
+.buttonZ {
+  padding: 1rem;
+  margin: 2rem;
+  font-size: 22px;
+  background-color: #16B199 !important;
+  border-color: #16B199 !important;
+}
+
+.buttonZ:hover {
+  background-color: #0F7B6B !important;
+  border-color: #0F7B6B !important;
+}
