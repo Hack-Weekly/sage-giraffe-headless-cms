@@ -13,7 +13,10 @@
 - 4orKe (https://github.com/gagepoling01)
 - RegalLibrarian (https://github.com/RegalLibrarian)
 
-Mentor: nf3 (https://github.com/nf3)
+Mentors: 
+- nf3 (https://github.com/nf3)
+- Nick (?)
+
 
 ## Description:
 A headless CMS is a content management system that focuses solely on managing and delivering content, decoupled from the presentation layer or "head" of a website or application. Unlike traditional CMS platforms, a headless CMS does not dictate how the content is displayed. Instead, it provides a back-end infrastructure and an API that allows content creators to organize, create, and edit content, while developers have the freedom to deliver that content to various front-end channels. Us here at Sage Giraffe have created this Headless CMS with the purpose of providing that layer for the user to create/update their content. 
