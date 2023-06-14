@@ -21,6 +21,10 @@ def index():
 def docs():
     return render_template('docs.html')
 
+@cms.route('/docs-api')
+def docs_api():
+    return render_template('docs_api.html')
+
 @cms.route('/log', methods=['GET'])
 @login_required
 def log():
