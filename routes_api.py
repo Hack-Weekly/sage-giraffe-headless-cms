@@ -10,7 +10,7 @@ api = Blueprint('api', __name__)
 @api.route('/api/content/all', methods=['GET'])
 def get_all_content():
     allContent = Content.query.all()
-    data ={}
+    data = []
     for content in allContent:
         key = content.id
         value = {"title": content.title,
@@ -23,7 +23,7 @@ def get_all_content():
 @api.route('/api/content/limit/<int:limit>', methods=['GET'])
 def get_content_by_limit(limit):
     all_content = Content.query.limit(limit).all()
-    data = {}
+    data = []
     for content in all_content:
         key = content.id
         value = {
@@ -32,7 +32,8 @@ def get_content_by_limit(limit):
             "createdAt": content.createdAt,
             "author": content.user.username
         }
-        data[key] = value
+        # data[key] = value
+        data.append(value)
     return jsonify(data)
 
 @api.route('/api/content/id/<int:content_id>', methods=['GET'])
