@@ -286,18 +286,21 @@ def add_user():
 def update_user(user_id):
     user = User.query.get_or_404(user_id)
     if request.method == 'POST':
-        user.username = request.form['username']
-        user.password = bcrypt.generate_password_hash(request.form['password']).decode('utf-8')
-        user.role = request.form['role']
         try:
-            db.session.commit()
+            user.username = request.form['username']
+            user.password = bcrypt.generate_password_hash(request.form['password']).decode('utf-8')
+            user.role = request.form['role']
+            try:
+                db.session.commit()
 
-            log_entry = Log(user_id=current_user.id, action=f'Updated user: {user.username}')
-            db.session.add(log_entry)
-            db.session.commit()
-            return redirect(url_for('cms.admin'))
-        except:
-            return "There was an error updating your content"
+                log_entry = Log(user_id=current_user.id, action=f'Updated user: {user.username}')
+                db.session.add(log_entry)
+                db.session.commit()
+                return redirect(url_for('cms.admin'))
+            except:
+                return "There was an error updating your content"
+        except Exception as e:
+            return render_template('edit_user.html', user=user, error=e)
     else:
         return render_template('edit_user.html', user=user)
 
