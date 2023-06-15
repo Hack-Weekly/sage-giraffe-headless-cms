@@ -160,11 +160,8 @@ def add_new_user():
                     log_entry = Log(user_id=new_user.id, action=f'Registered new user: {username}')
                     db.session.add(log_entry)
                     db.session.commit()
-
-                    if current_user.role == 'admin' or (not current_user and role == 'admin'):
-                        return redirect(url_for('cms.admin'))
-                    else:
-                        return redirect(url_for('cms.add_user'))
+                    
+                    return redirect(url_for('cms.index'))
                 except:
                     return "There was an error adding your user"
 
