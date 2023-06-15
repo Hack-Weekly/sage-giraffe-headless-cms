@@ -160,8 +160,11 @@ def add_new_user():
                     log_entry = Log(user_id=new_user.id, action=f'Registered new user: {username}')
                     db.session.add(log_entry)
                     db.session.commit()
-                    
-                    return redirect(url_for('cms.index'))
+
+                    if current_user.role == 'admin' or (not current_user and role == 'admin'):
+                        return redirect(url_for('cms.admin'))
+                    else:
+                        return redirect(url_for('cms.add_user'))
                 except:
                     return "There was an error adding your user"
 
@@ -337,5 +340,3 @@ def confirm_delete_user(user_id):
 @cms.app_errorhandler(404)
 def invalid_route(e):
     return render_template('404.html')
-
-#Route for Create(?)
