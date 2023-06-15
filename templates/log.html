@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block head %}
+  <title>Activity Log</title>
+{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+  <div class="w-75 mx-auto">
+    <div class="card m-4 p-4">
+      <div class="row">
+        <div class="col-6">
+            <h2>Activity Log</h2>
+        </div>
+        <div class="col-6">
+            <a href="{{ url_for('cms.admin') }}" class="btn btn-success"
+            >Admin Dashboard</a
+            >
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">
+              <a href="{{ url_for('cms.log', sort='id', order=toggle_order('id')) }}">ID</a>
+            </th>
+            <th scope="col">
+              <a href="{{ url_for('cms.log', sort='user', order=toggle_order('user')) }}">User</a>
+            </th>
+            <th scope="col">
+              <a href="{{ url_for('cms.log', sort='action', order=toggle_order('action')) }}">Action</a>
+            </th>
+            <th scope="col">
+              <a href="{{ url_for('cms.log', sort='timestamp', order=toggle_order('timestamp')) }}">Timestamp</a>
+            </th>
+          </tr>
+        </thead>          
+        <tbody>
+          {% for log in logs %}
+          <tr>
+            <td>{{ log.id }}</td>
+            <td>{{ log.user.username }}</td>
+            <td>{{ log.action }}</td>
+            <td>{{ log.timestamp }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -6,105 +6,33 @@
   <div class="center">
     <img src="{{url_for('static', filename='images/sageGiraffeReading.png')}}" alt="A wise old giraffe reading"
       class="giraffe" />
-  </div>
-</div>
-<div class="container index" id="documentation-part">
-  <div class="index-bar">
-    <h1>Table of Contents</h1>
-    <ul>
-      <li id="main"><a href="#section1">How To Use It</a></li>
-      <li>
-        <a id="main" href="#section5">Features</a>
-        <ul>
-          <a href="#sub-section1">
-            <li class="sub-index">I. User Authentication</li>
-          </a>
-          <a href="#sub-section2">
-            <li class="sub-index">II. User Management</li>
-          </a>
-          <a href="#sub-section3">
-            <li class="sub-index">III. Content Management</li>
-          </a>
-          <a href="#sub-section4">
-            <li class="sub-index">IV. Routing and Page Rendering</li>
-          </a>
-        </ul>
-      </li>
-      <li id="main"><a href="#section2">Admin Page</a></li>
-      <li id="main"><a href="#section3">Content Page</a></li>
-      <li id="main"><a href="#section4">LogIn/Registration</a></li>
-    </ul>
-  </div>
-  <div class="documentation-section">
-    <h1>Documentation Section</h1>
-    <h2 id="section1">How To Use It</h2>
-    <p>
-      Our Headless CMS was structured to be used by any costumer in any type of
-      product. Through our thoughfully engineered architecture, we provide a
-      platform for all your needs.
-    </p>
-
-    <h2 id="section5">Features</h2>
-    <p>
-    <h3 id="sub-section1">I. User Authentication and Authorization: </h3>
-    <ul>
-      <li>Registration: Users can register with a username, password, and role.</li>
-      <li>Login: Users can log in with their credentials, and the CMS verifies the username and hashed password.</li>
-      <li>Logout: Users can log out from their current session.</li>
-    </ul>
-    </p>
-    <p>
-    <h3 id="sub-section2">II. User Management: </h3>
-    <ul>
-      <li>Admin Dashboard: An admin user has access to an admin dashboard.</li>
-      <li>User Listing: Admin users can view a list of all registered users, sorted by the last login timestamp.</li>
-      <li>Add User: Admin users can add new users to the CMS.</li>
-      <li> Update User: Admin users can update the username, password, and role of any user.</li>
-      <li>Delete User: Admin users can delete a user from the CMS.</li>
-      </p>
-    </ul>
-    <h3 id="sub-section3">III. Content Management: </h3>
-    <ul>
-      <li>Content Dashboard: Authenticated users can access a content dashboard.</li>
-      <li>View Content: Authenticated users can view a list of all contents, sorted by creation date.</li>
-      <li>Add Content: Authenticated users can create new content by providing a title and body.</li>
-      <li>Update Content: Authenticated users can edit the title and body of their existing content.</li>
-      <li>Delete Content: Authenticated users can delete their own content.</li>
-    </ul>
-    <h3 id="sub-section4">IV. Routing and Page Rendering:</h3>
-    <ul>
-      <li>Index Route: Renders the default index.html template.</li>
-      <li>Login Route: Renders the login page template and handles user authentication.</li>
-      <li>Logout Route: Logs out the user and redirects to the index route.</li>
-      <li>Register Route: Handles user registration and redirects to the admin dashboard upon successful registration.
-      </li>
-      <li>Admin Dashboard Route: Renders the admin dashboard template and displays the list of registered users.</li>
-      <li>Content Dashboard Route: Renders the content dashboard template and displays the list of contents.</li>
-      <li>Add Content Route: Renders the add content template and handles the creation of new content.</li>
-      <li>Update Content Route: Renders the edit content template and handles the updating of existing content.</li>
-      <li>Delete Content Route: Handles the deletion of content.</li>
-      <li>Add User Route: Renders the add user template for admin users to add new users.</li>
-      <li>Update User Route: Renders the edit user template and handles the updating of user details.</li>
-      <li>Delete User Route: Handles the deletion of a user.</li>
-      <li>404 Route: Renders a custom 404.html template for invalid routes.</li>
-    </ul>
-    <h2 id="section2">Admin Page</h2>
-    <p>
-      Etiam consequat tellus tellus, id bibendum justo eleifend sed. Fusce
-      fermentum libero a fringilla dapibus.
-    </p>
-
-    <h2 id="section3">Content Page</h2>
-    <p>
-      Nunc eu tincidunt tellus, ut scelerisque lorem. Sed tincidunt turpis id
-      risus tincidunt feugiat.
-    </p>
-
-    <h2 id="section4">LogIn/Registration</h2>
-    <p>
-      Phasellus ac tristique enim, et ultrices enim. In dapibus nulla id urna
-      malesuada, id interdum elit vestibulum.
-    </p>
+    <h2>SG Headless CMS provides flexibility and speed for developers.</h2>
+    <div id="buttonDiv">
+      <a href="https://github.com/Hack-Weekly/sage-giraffe-headless-cms">
+        <button type="button" class="btn btn-primary buttonZ">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-github"
+            viewBox="0 0 16 16">
+            <path
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+          </svg>
+          View on GitHub
+        </button>
+      </a>
+      <a href="{{url_for('cms.docs_api')}}">
+        <button type="button" class="btn btn-primary buttonZ">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-journal-code"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M8.646 5.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 0 1 0-.708zm-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 8l1.647-1.646a.5.5 0 0 0 0-.708z" />
+            <path
+              d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+            <path
+              d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+          </svg>
+          Read API Docs
+        </button>
+      </a>
+    </div>
   </div>
 </div>
 {% endblock %}
