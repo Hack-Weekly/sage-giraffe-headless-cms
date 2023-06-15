@@ -90,7 +90,7 @@ def register():
         try:
             username = request.form['username']
             password = request.form['password']
-            role = request.form['role']
+            role = 'writer'
             # Perform registration logic here
 
             hash_password = bcrypt.generate_password_hash(password).decode('utf-8')
