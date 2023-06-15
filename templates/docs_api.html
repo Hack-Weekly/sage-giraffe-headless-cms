@@ -18,7 +18,7 @@
               aria-expanded="true"
               aria-controls="endpointOne"
             >
-              Request all posts: /api/allcontent
+              Request all posts: /api/content/all
             </button>
           </h2>
           <div
@@ -28,45 +28,71 @@
           >
             <pre class="accordion-body" id="all-content">  [
               {
-                  id:1,
-                  body:'...',
-                  createdAt:'...',
-                  category:'...',
-                  description:'...',
-                  image:'...'
+                "author": "John Doe",
+                "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies",
+                "createdAt": "Fri, 09 Jun 2023 07:15:16 GMT",
+                "id": 1,
+                "title": Lorem ipsum"
               },
-              /*...*/
               {
-                  id:30,
-                  title:'...',
-                  price:'...',
-                  category:'...',
-                  description:'...',
-                  image:'...'
+                "author": "Alex Doe",
+                "body": "Duis in fermentum lectus. Nam finibus urna leo, eu vehicula ipsum malesuada eget.",
+                "createdAt": "Sat, 10 Jun 2023 23:42:46 GMT",
+                "id": 2,
+                "title": "Duis"
+              },
+              {
+                "author": "Jane Doe",
+                "body": "Vivamus facilisis tellus id risus pretium, fermentum blandit neque efficitur.",
+                "createdAt": "Sun, 11 Jun 2023 23:43:26 GMT",
+                "id": 3,
+                "title": "Vivamus"
               }
-          ]</pre>
+            ]</pre>
           </div>
         </div>
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#endpointTwo" aria-expanded="false" aria-controls="endpointTwo">
-              Request a limited number of posts : /api/content/limit/<int:limit>
+              Request a limited number of posts : /api/content/limit/&lt;int:limit&gt;
             </button>
           </h2>
           <div id="endpointTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-            <div class="accordion-body">info</div>
+            <pre class="accordion-body"> [
+              {
+                "author": "John Doe",
+                "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget ultricies",
+                "createdAt": "Fri, 09 Jun 2023 07:15:16 GMT",
+                "id": 1,
+                "title": Lorem ipsum"
+              },
+              {
+                "author": "Alex Doe",
+                "body": "Duis in fermentum lectus. Nam finibus urna leo, eu vehicula ipsum malesuada eget.",
+                "createdAt": "Sat, 10 Jun 2023 23:42:46 GMT",
+                "id": 2,
+                "title": "Duis"
+              }
+          ] </pre>
           </div>
         </div>
         <div class="accordion-item">
           <h2 class="accordion-header">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
               data-bs-target="#endpointThree" aria-expanded="false" aria-controls="endpointThree">
-              Request a specific post : post/api/content/id/<int:content_id>
+              Request a specific post : post/api/content/id/&lt;int:content_id&gt;
             </button>
           </h2>
           <div id="endpointThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-            <div class="accordion-body">Info</div>
+            <pre class="accordion-body">
+              {
+                "author": "b",
+                "body": "lorem",
+                "createdAt": "Fri, 09 Jun 2023 23:43:26 GMT",
+                "title": "test"
+              }
+            </pre>
           </div>
         </div>
       </div>
