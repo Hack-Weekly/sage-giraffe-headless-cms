@@ -11,6 +11,9 @@
         <div>
           <h3>Update User</h3>
         </div>
+        {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
         <div class="row p-2">
           <div class="col-4 text-end">
             <label for="username" class="form-label">
