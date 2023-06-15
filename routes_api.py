@@ -12,12 +12,13 @@ def get_all_content():
     allContent = Content.query.all()
     data = []
     for content in allContent:
-        key = content.id
-        value = {"title": content.title,
-                 "body": content.body,
-                 "createdAt": content.createdAt,
-                 "author": content.user.username}
-        data[key]=value
+        value = {}
+        value["id"] = content.id
+        value["title"] = content.title
+        value["body"] = content.body
+        value["createdAt"] = content.createdAt
+        value["author"] = content.user.username
+        data.append(value)
     return jsonify(data)
 
 @api.route('/api/content/limit/<int:limit>', methods=['GET'])
