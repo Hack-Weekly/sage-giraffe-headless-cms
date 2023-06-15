@@ -23,3 +23,10 @@ A headless CMS is a content management system that focuses solely on managing an
 
 ## Functionality: 
 For more details on how to use the API, please visit our website. There, we have a fully fleshed out page on how to use certain endpoints, as well as a documentation section that properly explains the possibilities of each part of our CMS.
+
+## Features
+### Creation of Users:
+```
+python createUser.py <username> <password>
+```
+
